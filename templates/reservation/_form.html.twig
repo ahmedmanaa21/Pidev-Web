@@ -1,0 +1,51 @@
+{{ form_start(form ,{'attr': { 'novalidate ': 'novalidate' }}) }}
+
+<section>
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <h1>Passer reservation</h1>
+
+            <div class="form-group">
+                <label class="col-2 col-form-label">Cin :</label>
+                <div class="col-10">
+                    {{ form_widget(form.cin, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.cin, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label">Date Reservation :</label>
+                <div class="col-10">
+                    {{ form_widget(form.dateReservation, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.dateReservation, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label" >id zone de camping :</label>
+                <div class="col-10">
+                    {{ form_widget(form.idZonecamping, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.idZonecamping, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+
+            <br>
+            </br>
+
+            <div class="form-group">
+                <label class="col-2 col-form-label" > nbr de perssone:</label>
+                <div class="col-10">
+                    {{ form_widget(form.nbrpersonne, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.nbrpersonne, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="SignUp"   class="btn theme-btn full-width btn-m" >
+            </div>
+            <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">Retour</a>
+    </div>
+</section>
+
+{{ form_end(form) }}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block container %}
+<div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title"> Form elements </h3>
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                </ol>
+              </nav>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Ajouter Admin</h4>
+                  <p class="card-description"></p>
+                  <table border="1">
+                  <tr>
+                  <td>Nom</td>
+                  <td>Prenom</td>
+                  <td>Email</td>
+                  <td>Mot de passe</td>
+                  <td>Numero tel</td>
+                  </tr>
+                  {% for admin in Admin %}
+                  <td>{{Admin.nom}}</td>
+                  <td>{{Admin.prenom}}</td>
+                  <td>{{Admin.email}}</td>
+                  <td>{{Admin.mdp}}</td>
+                  <td>{{Admin.numtel}}</td>
+                  {% endfor %}
+                  </table>
+                  <a href="{{path('AddAdmin')}}">Ajouter Admin></a>
+                </div>
+              </div>
+            </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer class="footer">
+            
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      {% endblock %}

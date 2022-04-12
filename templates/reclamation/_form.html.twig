@@ -1,0 +1,70 @@
+
+{{ form_start(form ,{attr: { novalidate : 'novalidate' }}) }}
+
+<section>
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <h1>Passer reservation</h1>
+
+            <div class="form-group">
+                <label class="col-2 col-form-label">type rec :</label>
+                <div class="col-10">
+                    {{ form_widget(form.typeRec, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.typeRec) }}
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label">description Rec :</label>
+                <div class="col-10">
+                    {{ form_widget(form.descriptionRec, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.descriptionRec) }}
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label" >date reclamation :</label>
+                <div class="col-10">
+                    {{ form_widget(form.dateRec, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.dateRec, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-2 col-form-label" > cin:</label>
+                <div class="col-10">
+                    {{ form_widget(form.cin, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.cin, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+
+                <br></br>
+            </div>
+            <div class="form-group">
+                <label class="col-2 col-form-label" > screenshot:</label>
+                <div class="col-10">
+                    {{ form_widget(form.screenshot, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.screenshot, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-2 col-form-label" > email:</label>
+                <div class="col-10">
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.email, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn theme-btn full-width btn-m" >{{ button_label|default('Save') }}</button>
+
+            </div>
+            <a class="btn btn-primary" href="{{ path('app_reclamation_index') }}">Retour</a>
+        </div>
+</section>
+{{ form_end(form) }}
