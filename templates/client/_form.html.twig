@@ -1,0 +1,88 @@
+
+{{form_start(form,{attr: { novalidate : 'novalidate' }})  }}
+<section>
+<div class="container">
+                                        <form class="form-horizontal" role="form">
+<h1>Create your CampersDen Account and join us !</h1>
+
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label">Cin :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.cin, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.cin) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label">Full Name :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.nomprenom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.nomprenom) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Username :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.surnom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.surnom) }}
+
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Gender :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.sexe, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.sexe) }}
+
+                                                </div>
+                                            </div>
+                                            <br></br>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" for="example-email">Email :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.email) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Password :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.mdp, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.mdp) }}
+
+                                                </div>
+                                            </div>
+                                        <div class="form-group">
+                                            <label class="col-2 col-form-label" >Date of Birth :</label>
+                                            <div class="col-10">
+                                                {{ form_widget(form.datenaissance , { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.datenaissance) }}
+
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Adress :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.adresse, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.adresse) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Your photo :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.image, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.image) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group text-center">
+                                            <input type="submit" value="SignUp"   class="btn theme-btn full-width btn-m" >
+                                            </div>
+                                            <a class="btn btn-primary" href="{{ path('indexFront') }}">Retour</a>
+</div>
+</section>
+                                            {{ form_end(form) }}
