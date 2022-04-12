@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Zonecamping{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+    <h1>Create new Zonecamping</h1>
+
+    {{ include('zonecamping/_form.html.twig') }}
+
+    <a href="{{ path('app_zonecamping_index') }}">back to list</a>
+    </div>
+</section>
+{% endblock %}

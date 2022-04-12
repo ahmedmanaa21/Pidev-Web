@@ -1,0 +1,47 @@
+{% extends 'front.html.twig' %}
+
+{% block title %}Zonecamping{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1>Zonecamping</h1>
+
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ zonecamping.id }}</td>
+                </tr>
+                <tr>
+                    <th>Region</th>
+                    <td>{{ zonecamping.region }}</td>
+                </tr>
+                <tr>
+                    <th>Delegation</th>
+                    <td>{{ zonecamping.delegation }}</td>
+                </tr>
+                <tr>
+                    <th>NomCentre</th>
+                    <td>{{ zonecamping.nomCentre }}</td>
+                </tr>
+                <tr>
+                    <th>Latitude</th>
+                    <td>{{ zonecamping.latitude }}</td>
+                </tr>
+                <tr>
+                    <th>Longitude</th>
+                    <td>{{ zonecamping.longitude }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ zonecamping.description }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a href="{{ path('zoneFront') }}">back to list</a>
+
+        </div>
+    </section>
+{% endblock %}
