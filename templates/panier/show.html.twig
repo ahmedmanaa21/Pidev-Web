@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="container">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+    <h1>Panier</h1>
+   
+    
+     <a href="{{ path('app_panier_index') }}">back to list</a>
+
+    <a href="{{ path('app_panier_edit', {'idPanier': panier.idPanier}) }}">edit</a>
+    {{ include('panier/_delete_form.html.twig') }}
+
+  </nav>
+  </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdPanier</th>
+                <td>{{ panier.idPanier }}</td>
+            </tr>
+            <tr>
+                <th>TotalPanier</th>
+                <td>{{ panier.totalPanier }}</td>
+            </tr>
+            <tr>
+                <th>NbrEquipement</th>
+                <td>{{ panier.nbrEquipement }}</td>
+            </tr>
+            <tr>
+                <th>PrixEquipement</th>
+                <td>{{ panier.prixEquipement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   </div>
+   
+  
+    
+{% endblock %}

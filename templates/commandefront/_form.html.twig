@@ -1,0 +1,73 @@
+{{form_start(form,{attr: { novalidate : 'novalidate' }})  }}
+<section>
+<div class="container">
+                                        <form class="form-horizontal" role="form">
+<h1>Your Informations:</h1>
+
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label">Name :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.nom, { 'attr': {'class': 'form-control'} }) }}
+                                                    
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label">Last name :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.prenom, { 'attr': {'class': 'form-control'} }) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Tel Number :</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.numTel, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.numTel, { 'attr': {'class': 'form-control'} }) }}
+
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Code Postal:</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.codepostal, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.codepostal, { 'attr': {'class': 'form-control'} }) }}
+
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" for="example-email">Etat</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.etat, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.etat, { 'attr': {'class': 'form-control'} }) }}
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Mail Adress</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.adressmail, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.adressmail, { 'attr': {'class': 'form-control'} }) }}
+
+                                                </div>
+                                            </div>
+                                        <div class="form-group">
+                                            <label class="col-2 col-form-label" >Payment Mode</label>
+                                            <div class="col-10">
+                                                {{ form_widget(form.modePaiment , { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_errors(form.modePaiment , { 'attr': {'class': 'form-control'} }) }}
+
+                                            </div>
+                                            <div class="form-group text-center">
+                                            <input type="submit" value="Valider Commande"   class="btn theme-btn full-width btn-m" >
+                                            </div>
+                                        </div>
+                                           
+                                            <a class="btn btn-primary" href="{{ path('indexFront') }}">Retour</a>
+</div>
+</section>
+                                            {{ form_end(form) }}

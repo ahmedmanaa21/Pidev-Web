@@ -1,0 +1,41 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Equipement index{% endblock %}
+
+{% block body %}
+    <h1>Equipement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>RefEquipement</th>
+                <th>NomEquipement</th>
+                <th>Image</th>
+                <th>PrixEquipement</th>
+                <th>DescriptionEquipement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+                <td>{{ equipement.refEquipement }}</td>
+                <td>{{ equipement.nomEquipement }}</td>
+                <td>{{ equipement.image }}</td>
+                <td>{{ equipement.prixEquipement }}</td>
+                <td>{{ equipement.descriptionEquipement }}</td>
+                <td>
+                    <a href="{{ path('app_equipement_show', {'refEquipement': equipement.refEquipement}) }}">show</a>
+                    <a href="{{ path('app_equipement_edit', {'refEquipement': equipement.refEquipement}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_new') }}">Create new</a>
+{% endblock %}

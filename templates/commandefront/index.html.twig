@@ -1,0 +1,48 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+    <h1>Commande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCmd</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>NumTel</th>
+                <th>Codepostal</th>
+                <th>Etat</th>
+                <th>Adressmail</th>
+                <th>ModePaiment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.idCmd }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.numTel }}</td>
+                <td>{{ commande.codepostal }}</td>
+                <td>{{ commande.etat }}</td>
+                <td>{{ commande.adressmail }}</td>
+                <td>{{ commande.modePaiment }}</td>
+                <td>
+                    <a button type="button" class="btn btn-info" href="{{ path('app_commandefront_show', {'idCmd': commande.idCmd}) }}">show</a>
+                    <a button type="button" class="btn btn-secondary" href="{{ path('app_commandefront_edit', {'idCmd': commande.idCmd}) }}">edit</a>
+                     <a button type="button" class="btn btn-warning" href="{{ path('app_commandefront_delete', {'idCmd': commande.idCmd}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commandefront_new') }}">Create new</a>
+{% endblock %}
