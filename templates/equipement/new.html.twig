@@ -1,0 +1,54 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}New Equipement{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <h1><div class="panel-heading"> Ajouter equipement</div></h1>
+            <div class="panel-body">
+                <div class="col-md-6">
+
+                
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        <h2><label>Nom equipement</label><h2>
+                        {{ form_widget(form.nomEquipement, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.nomEquipement) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Image equipement</label>
+                        {{ form_widget(form.file, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.file) }}
+                    </div>
+                  
+                    <div class="form-group">
+                        <h2><label>Prix equipement</label><h2>
+                        {{ form_widget(form.prixEquipement, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.prixEquipement) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <h2><label>description</label><h2>
+                        {{ form_widget(form.descriptionEquipement, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.descriptionEquipement) }}
+                    </div>
+                
+                    <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate />
+
+                    {{ form_end(form) }}
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div><!-- /.col-->
+    </div>
+{% endblock %}
+
+
+
+    

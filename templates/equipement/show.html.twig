@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement{% endblock %}
+
+{% block body %}
+    <h1></h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>RefEquipement</th>
+                <td>{{ equipement.refEquipement }}</td>
+            </tr>
+            <tr>
+                <th>NomEquipement</th>
+                <td>{{ equipement.nomEquipement }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+               <td><img src="{{ asset('Upload/')}}{{ equipement.image }}" width="100"  /></td>
+            </tr>
+            <tr>
+                <th>PrixEquipement</th>
+                <td>{{ equipement.prixEquipement }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionEquipement</th>
+                <td>{{ equipement.descriptionEquipement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_index') }}">back to list</a>
+
+    <a href="{{ path('app_equipement_edit', {'refEquipement': equipement.refEquipement}) }}">edit</a>
+
+    {{ include('equipement/_delete_form.html.twig') }}
+{% endblock %}
