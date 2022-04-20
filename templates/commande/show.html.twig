@@ -5,6 +5,15 @@
 {% block body %}
 <div class="container">
     <h1>Commande</h1>
+    <div class="detail-wrapper padd-top-30 padd-bot-30">
+
+                                    <div class="row text-center">
+                                        <div class="col-md-12">
+                                            <a href="javascript:window.print()" class="btn btn-warning">Print Facture</a>
+
+
+                                        </div>
+                                    </div>
      <a  button type="button" class="btn btn-outline-secondary" href="{{ path('app_commande_index') }}">back to list</a>
 
     <a button type="button" class="btn btn-outline-secondary" href="{{ path('app_commande_edit', {'idCmd': commande.idCmd}) }}">edit</a>

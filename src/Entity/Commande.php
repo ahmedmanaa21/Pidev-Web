@@ -24,6 +24,8 @@ class Commande
     private $idCmd;
 
      /**
+      * @var string
+
      * @Assert\NotBlank(message="nom doit etre non vide")
      * @Assert\Length(
      *      min = 7,
@@ -41,7 +43,7 @@ class Commande
      *
      *
      *  @ORM\Column(name="prenom", type="string", length=255, nullable=false)
-     *  @Assert Length(
+     *  @Assert\Length(
      * min = 2,
      * max = 50,
      * minMessage = "doit etre >=3",
@@ -70,7 +72,7 @@ class Commande
     /**
      * @var string
      
-     * @ORM\Column(name="Etat", type="string", length=255, nullable=false
+     * @ORM\Column(name="Etat", type="string", length=255, nullable=false)
      */
     private $etat;
 

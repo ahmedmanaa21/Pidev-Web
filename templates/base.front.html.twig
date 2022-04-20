@@ -15,6 +15,7 @@
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/responsiveness.css')}}" rel="stylesheet" />
     <link id="jssDefault" rel="stylesheet" href="{{ asset('assets/css/skins/default.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 </head>
 
 <body>
@@ -487,6 +488,10 @@
                         <script src="{{ asset('assets/plugins/js/jquery.slimscroll.min.js')}}"></script>
                         <script src="{{ asset('assets/plugins/js/jquery.metisMenu.js')}}"></script>
                         <script src="{{ asset('assets/plugins/js/jquery.easing.min.js')}}"></script>
+                         <!-- Load Flashy default JavaScript -->
+                         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+                          <!-- Flashy depends on jQuery -->
+                         <script src="//code.jquery.com/jquery.js"></script>
 
                         <!-- Custom Js -->
                         <script src="{{ asset('assets/js/custom.js')}}"></script>
@@ -563,6 +568,7 @@
                                 $("#styleOptions").styleSwitcher();
                             });
                         </script>
+                         {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 
 <!-- Mirrored from codeminifier.com/travel-stock-demo/home-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Feb 2022 22:31:33 GMT -->

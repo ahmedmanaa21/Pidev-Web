@@ -30,26 +30,31 @@ class PanierfrontController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="app_panierfront_new", methods={"GET", "POST"})
+     * @Route("/new/{$id}", name="app_panierfront_new")
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $panier = new Panier();
-        $form = $this->createForm(Panier1Type::class, $panier);
-        $form->handleRequest($request);
+    public function new($id){
+    
+       $idprd = $this->getDoctrine()->getRepository(Equipement::class)->find($id);
+       
+       $panier = new Panier();
+       $panier->setNompanier("Disponible") ;
+        $panier->setNbrequipement(1) ;
+        $panier->setRefequipement($idprd) ;
+        $panier->setPrixequipement() ;
+    
+      
+            $em = $this->getDoctrine()->getManager();
+            
+            $em->persist($panier);
+            $em->flush();
+           $this->addFlash('success', 'Article Created! Knowledge is power!');
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($panier);
-            $entityManager->flush();
+    
 
-            return $this->redirectToRoute('app_panierfront_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('panierfront/new.html.twig', [
-            'panier' => $panier,
-            'form' => $form->createView(),
-        ]);
-    }
+               return $this->redirectToRoute("app_panierfront_index");
+        
+    
+}
 
     /**
      * @Route("/{idPanier}", name="app_panierfront_show", methods={"GET"})
@@ -94,3 +99,4 @@ class PanierfrontController extends AbstractController
         return $this->redirectToRoute('app_panierfront_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+ 

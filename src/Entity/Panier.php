@@ -34,7 +34,7 @@ class Panier
      * @ORM\Column(name="nbr_equipement", type="integer", nullable=false)
      */
     private $nbrEquipement;
-
+ 
     /**
      * @var int
      *
