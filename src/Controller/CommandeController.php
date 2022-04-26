@@ -11,27 +11,28 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
-
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 
 /**
  * @Route("/commande")
  */
 class CommandeController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_commande_index", methods={"GET"})
-     */
-    public function index(EntityManagerInterface $entityManager): Response
-    {
-        $commandes = $entityManager
-            ->getRepository(Commande::class)
-            ->findAll();
-
-        return $this->render('commande/index.html.twig', [
-            'commandes' => $commandes,
-        ]);
-    }
-
+    
+    
+        /**
+         * @Route("/", name="app_commande_index", methods={"GET"})
+         */
+        public function index(EntityManagerInterface $entityManager): Response
+        {
+            $commandes = $entityManager
+                ->getRepository(Commande::class)
+                ->findAll();
+    
+            return $this->render('commande/index.html.twig', [
+                'commandes' => $commandes,
+            ]);
+        }
     /**
      * @Route("/new", name="app_commande_new", methods={"GET", "POST"})
      */
@@ -97,15 +98,6 @@ class CommandeController extends AbstractController
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
     }
 
-      /**
-     * @Route("/stats", name="stats")
-     */
-    public function statistiques(ChartBuilderInterface $chartBuilder): Response {
-      
-       
-
-
-    }
 
 
 

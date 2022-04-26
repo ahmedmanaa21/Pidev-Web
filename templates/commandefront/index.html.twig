@@ -1,61 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.front.html.twig' %}
 
-{% block title %}Votre panier{% endblock %}
+{% block title %}Commande index{% endblock %}
 
 {% block body %}
-    <section class="bg-light p-3">
-        <h1>Votre panier</h1>
-    </section>
+    <h1>Commande index</h1>
+    {% for message in app.flashes('info') %}
+    <div class="alert alert-success">
+    {{message}}
+    </div>
+    {% endfor %}
 
     <table class="table">
         <thead>
             <tr>
-                <th>Produit</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Total</th>
-                <th>Actions</th>
+                <th>IdCmd</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>NumTel</th>
+                <th>Codepostal</th>
+                <th>Etat</th>
+                <th>Adressmail</th>
+                <th>ModePaiment</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
-
-            {% for equipement in dataPanier %}
-                <tr>
-                    <td>{{ equipement.nomEquipement }}</td>
-                    <td class="text-end">{{ equipement.prixEquipement }} DT</td>
-                    <td>{{ quantite }}</td>
-                    <td class="text-end">{{ quantite * equipement.prixEquipement }} DT</td>
-                    <td>
-                        <a href="{{path("vp_add", {refEquipement: equipement.refEquipement})}}" class="btn btn-success">
-                            <i class="bi bi-cart-plus"></i>
-                        </a>
-                        
-                        <a href="{{path("vp_remove", {refEquipement: equipement.refEquipement})}}" class="btn btn-warning">
-                            <i class="bi bi-cart-dash"></i>
-                        </a>
-                        <a href="{{path("vp_delete", {refEquipement: equipement.refEquipement})}}" class="btn btn-danger">
-                            <i class="bi bi-cart-x"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5" class="text-center">Votre panier est vide</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
+        {% for commande in commandes %}
             <tr>
-                <td colspan="3">Total</td>
-
-                <td class="text-end">{{ total }} DT</td>
+                <td>{{ commande.idCmd }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.numTel }}</td>
+                <td>{{ commande.codepostal }}</td>
+                <td>{{ commande.etat }}</td>
+                <td>{{ commande.adressmail }}</td>
+                <td>{{ commande.modePaiment }}</td>
                 <td>
-                    <a href="{{path("vp_delete_all")}}" class="btn btn-danger">Delete All
-                        <i class="bi bi-cart-x"></i>
-                    </a>
+                    <a button type="button" class="btn btn-info" href="{{ path('app_commandefront_show', {'idCmd': commande.idCmd}) }}">show</a>
+                    <a button type="button" class="btn btn-warning" href="{{ path('app_commandefront_edit', {'idCmd': commande.idCmd}) }}">edit</a>
+                     
                 </td>
             </tr>
-        </tfoot>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 
     <a href="{{ path('app_commandefront_new') }}">Create new</a>

@@ -34,7 +34,7 @@ class VotrePanierController extends AbstractController
            
             $total += $equipement->getPrixEquipement() * $quantite;
         }
-
+       
         return $this->render('panierfront/VotrePanier.html.twig', compact("dataPanier", "total"));
     }
 

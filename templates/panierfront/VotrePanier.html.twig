@@ -1,7 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.front.html.twig' %}
 
 {% block title %}Votre panier{% endblock %}
-
+ {% block navbar %}
+        <li>
+            <a href="{{ path('app_equipement_index') }}">Equipements</a>
+        </li>
+      {%endblock navbar %}
 {% block body %}
     <section class="bg-light p-3">
         <h1>Votre panier</h1>
@@ -18,13 +22,13 @@
             </tr>
         </thead>
         <tbody>
-
+        
             {% for equipement in dataPanier %}
                 <tr>
                     <td>{{ equipement.nomEquipement }}</td>
                     <td class="text-end">{{ equipement.prixEquipement }} DT</td>
-                    <td>{{ quantite }}</td>
-                    <td class="text-end">{{ quantite * equipement.prixEquipement }} DT</td>
+                   <td>1</td>
+                    <td class="text-end">{{equipement.prixEquipement }} DT</td>
                     <td>
                         <a href="{{path("vp_add", {refEquipement: equipement.refEquipement})}}" class="btn btn-success">
                             <i class="bi bi-cart-plus"></i>
@@ -49,10 +53,16 @@
                 <td colspan="3">Total</td>
 
                 <td class="text-end">{{ total }} DT</td>
+                
                 <td>
                     <a href="{{path("vp_delete_all")}}" class="btn btn-danger">Delete All
                         <i class="bi bi-cart-x"></i>
                     </a>
+                    <div class="btn-box">
+                         <a  href="{{ path("app_checkout",{"prixtotal": total }) }} " class="btn btn-warning" >
+                           payement
+                        </a>
+                    </div>
                 </td>
             </tr>
         </tfoot>
