@@ -1,46 +1,235 @@
 
 
 {% block body %}
-    <h1>Votre Commande</h1>
+ <html>
+    <head>
+        <style>
+            /** 
+                Set the margins of the page to 0, so the footer and the header
+                can be of the full height and width !
+             **/
+            @page {
+                margin: 0cm 0cm;
+            }
 
-    <table class="table table-success table-striped">
+            /** Define now the real margins of every page in the PDF **/
+            body {
+                margin-top: 2cm;
+                margin-left: 2cm;
+                margin-right: 2cm;
+                margin-bottom: 2cm;
+            }
+
+            /** Define the header rules **/
+            header {
+                
+      padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #AAAAAA;
+
+                /** Extra personal styles **/
+                background-color: DarkTurquoise;
+                color: white;
+               
+            }
+            
+
+#invoice {
+  float: right;
+  text-align: right;
+}
+
+#invoice h1 {
+  color: #0087C3;
+  font-size: 2.4em;
+  line-height: 1em;
+  font-weight: normal;
+  margin: 0  0 10px 0;
+}
+
+#invoice .date {
+  font-size: 1.1em;
+  color: #777777;
+}
+
+
+
+#logo {
+  float: left;
+  margin-top: 8px;
+}
+
+#logo img {
+  height: 70px;
+}
+
+#company {
+  float: right;
+  text-align: right;
+}
+
+            /** Define the footer rules **/
+            footer {
+                position: fixed; 
+                bottom: 0cm; 
+                left: 0cm; 
+                right: 0cm;
+                height: 2cm;
+
+                /** Extra personal styles **/
+                background-color: DarkTurquoise;
+                color: white;
+                text-align: center;
+                line-height: 1.5cm;
+            }
+            tbody {
+  position: relative;
+  width: 21cm;  
+  height: 29.7cm; 
+  margin: 0 auto; 
+  color: #555555;
+  background: #FFFFFF; 
+  font-family: Arial, sans-serif; 
+  font-size: 14px; 
+  font-family: SourceSansPro;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  padding: 20px;
+  background: #EEEEEE;
+  text-align: center;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+table th {
+  white-space: nowrap;        
+  font-weight: normal;
+}
+
+table td {
+  text-align: right;
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: url(SourceSansPro-Regular.ttf);
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+  color: #0087C3;
+  text-decoration: none;
+}
+
+#details {
+  margin-bottom: 50px;
+}
+
+#client {
+  padding-left: 6px;
+  border-left: 6px solid #0087C3;
+  float: left;
+}
+
+#client .to {
+  color: #777777;
+}
+
+h2.name {
+  font-size: 1.4em;
+  font-weight: normal;
+  margin: 0;
+}
+
+        </style>
+    </head>
+     <header class="clearfix">
+      <div id="logo">
+        <a href="https://ibb.co/5TgX7tn"><img src="https://i.ibb.co/TcxDCpb/logo.png" alt="logo" border="0" /></a>
+      </div>
+      <div id="company">
+        <h2 class="name">Campers Den</h2>
+        <div>455 Foggy Heights, AZ 85004, TU</div>
+        <div>(602) 519-0450</div>
+        <div><a href="mailto:company@example.com">campersden@gmail.com</a></div>
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">{{ commande.nom }}</h2>
+          <div class="address">Tunis, {{ commande.codepostal }}, Tu</div>
+          <div class="email"><a href="mailto:john@example.com">{{ commande.adressmail }}</a></div>
+        </div>
+        <div id="invoice">
+          <h4>INVOICE 3-2-1</h4>
+          <div class="date">Date of Invoice: 01/06/2022</div>
+          <div class="date">Due Date: 30/06/2022</div>
+        </div>
+      </div>
+    <footer>
+            Copyright &copy; <?php echo date("2022");?> 
+        </footer>
+
+
+        <!-- Wrap the content of your PDF inside a main tag -->
+        <main>
+
+
+    <table style="width: 100%; margin-top: 5px; border-bottom: 1px solid grey; margin-bottom: 5px;" border="0" cellspacing="0" cellpadding="5">
+                <tbody>
         <tbody>
-            <tr>
-                <th>IdCmd</th>
-                <td>{{ commande.idCmd }}</td>
+
+            <tr >
+                <th width="25%" style="background: lightgrey;">IdCmd</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.idCmd }}</td>
             </tr>
             <tr>
-                <th>Nom</th>
-                <td>{{ commande.nom }}</td>
+                <th width="25%" style="background: lightgrey;">Nom</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.nom }}</td>
             </tr>
             <tr>
-                <th>Prenom</th>
-                <td>{{ commande.prenom }}</td>
+                <th width="25%" style="background: lightgrey;">Prenom</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.prenom }}</td>
             </tr>
             <tr>
-                <th>NumTel</th>
-                <td>{{ commande.numTel }}</td>
+                <th width="25%" style="background: lightgrey;">NumTel</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.numTel }}</td>
             </tr>
             <tr>
-                <th>Codepostal</th>
-                <td>{{ commande.codepostal }}</td>
+                <th width="25%" style="background: lightgrey;">Codepostal</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.codepostal }}</td>
             </tr>
             <tr>
-                <th>Etat</th>
-                <td>{{ commande.etat }}</td>
+                <th width="25%" style="background: lightgrey;">Etat</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.etat }}</td>
             </tr>
             <tr>
-                <th>Adressmail</th>
-                <td>{{ commande.adressmail }}</td>
+                <th width="25%" style="background: lightgrey;">Adressmail</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.adressmail }}</td>
             </tr>
             <tr>
-                <th>ModePaiment</th>
-                <td>{{ commande.modePaiment }}</td>
+                <th width="25%" style="background: lightgrey;">ModePaiment</th>
+                <td width="25%" style="background: LightSlateGray;">{{ commande.modePaiment }}</td>
             </tr>
         </tbody>
     </table>
 
 
+</main>
 
    
 {% endblock %}

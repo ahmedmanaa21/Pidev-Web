@@ -62,6 +62,8 @@ class Panier
      */
     private $refEquipement;
 
+    
+    
     public function getIdPanier(): ?int
     {
         return $this->idPanier;

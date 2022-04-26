@@ -549,6 +549,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/ux-chartjs": {
+        "version": "v2.1.1"
+    },
     "symfony/validator": {
         "version": "4.4",
         "recipe": {
@@ -605,6 +608,9 @@
     },
     "twig/twig": {
         "version": "v3.3.9"
+    },
+    "twilio/sdk": {
+        "version": "6.36.1"
     },
     "webmozart/assert": {
         "version": "1.10.0"

@@ -24,7 +24,7 @@ class PanierController extends AbstractController
             ->getRepository(Panier::class)
             ->findAll();
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panierfront/index.html.twig', [
             'paniers' => $paniers,
         ]);
     }

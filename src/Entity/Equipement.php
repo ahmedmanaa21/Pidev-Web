@@ -20,7 +20,7 @@ class Equipement
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $refEquipement;
-
+   
     /**
      * @var string
      *
@@ -102,5 +102,7 @@ class Equipement
         return $this;
     }
 
-
+    public function __toString() {
+        return $this->descriptionEquipement;
+    }
 }

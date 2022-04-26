@@ -6,6 +6,8 @@ use App\Entity\Commande;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class Commande1Type extends AbstractType
 {
@@ -14,7 +16,7 @@ class Commande1Type extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('numTel')
+            ->add('numTel' ,TextType::class)
             ->add('codepostal')
             ->add('etat')
             ->add('adressmail')

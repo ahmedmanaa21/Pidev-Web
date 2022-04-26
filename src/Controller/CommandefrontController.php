@@ -62,7 +62,20 @@ class CommandefrontController extends AbstractController
             return $this->redirectToRoute('app_commandefront_index', [], Response::HTTP_SEE_OTHER);
         }
 
-      
+        $numTel=$form['numTel']->getData()->$this->toString();
+        $sid = 'ACd5f1f07e2af7fbc1d0c1b361154d7262';
+        $token = 'd397e83576aa5a8d2ffca44e4c4899e3';
+        $sms = new \Twilio\Rest\Client($sid, $token);
+
+        $sms->messages->create(
+          '$numTel',
+            [
+                'from' => '+12392913891',
+                'body' => 'Hi,your your order is in progress '
+
+            ]
+        );
+        
 
         return $this->render('commandefront/new.html.twig', [
             'commande' => $commande,
@@ -134,9 +147,11 @@ class CommandefrontController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$commande->getIdCmd(), $request->request->get('_token'))) {
             $entityManager->remove($commande);
             $entityManager->flush();
-        }
+        
         $this->addFlash('info','Deleted successfully!');
         return $this->redirectToRoute('app_commandefront_index', [], Response::HTTP_SEE_OTHER);
     }
-    
+
+   
+}
 }

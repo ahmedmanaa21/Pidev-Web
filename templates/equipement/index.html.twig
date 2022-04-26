@@ -1,15 +1,20 @@
 {% extends 'base.front.html.twig' %}
 
-{% block title %}Equipement index{% endblock %}
+{%  block title %}Equipement index{% endblock %}
 
 {% block body %}
-    <h1>Equipement index</h1>
+
+<br>
+<br>
+
+<br>
+
+    <h1> </h1>
 <div class="container">
         <div class="row">       
           <div class="col-md-12">
             <div class="heading">
               <span class="theme-cl">show our new products</span>
-              <h1>Products</h1>
             </div>
           </div>
         </div>
@@ -40,7 +45,8 @@
 
                 <div class="entry-meta">
                    
-                     <a href={{path('app_panierfront_new',{'id':equipement.refEquipement})}} class="btn btn-success"> Add</a>
+                     <a href="{{path("vp_vpp", {refEquipement: equipement.refEquipement})}}" class="btn btn-success"> <i class="bi bi-cart-plus"></i> Add
+                    </a>
                   
                     <div class="meta-item meta-comment fl-right">
                         <span class="text-through">{{equipement.prixEquipement}}</span

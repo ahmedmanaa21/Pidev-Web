@@ -7,8 +7,8 @@
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label">Name :</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.nom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_widget(form.nom, { 'attr': {'class': 'form-control','placeholder': "Username"} }) }}
+                                                    {{ form_errors(form.nom, { 'attr': {'class':'text-danger'} }) }}
                                                     
 
                                                 </div>
@@ -16,16 +16,16 @@
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label">Last name :</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.prenom, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.prenom, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_widget(form.prenom, { 'attr': {'class': 'form-control','placeholder': "Last Name"} }) }}
+                                                    {{ form_errors(form.prenom, { 'attr': {'class': 'text-danger'} }) }}
 
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label" >Tel Number :</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.numTel, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.numTel, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form(form.numTel, { 'attr': {'class': 'form-control','placeholder': "+216"} }) }}
+                                                    {{ form_errors(form.numTel, { 'attr': {'class': 'text-danger'} }) }}
 
                                                 </div>
                                             </div>
@@ -33,8 +33,8 @@
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label" >Code Postal:</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.codepostal, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.codepostal, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_widget(form.codepostal, { 'attr': {'class': 'form-control','placeholder': " code postal"} }) }}
+                                                    {{ form_errors(form.codepostal, { 'attr': {'class': 'text-danger'} }) }}
 
                                                 </div>
                                             </div>
@@ -42,24 +42,24 @@
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label" for="example-email">Etat</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.etat, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.etat, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_widget(form.etat, { 'attr': {'class': 'form-control','placeholder': "Male or Female"} }) }}
+                                                    {{ form_errors(form.etat, { 'attr': {'class': 'text-danger'} }) }}
 
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label" >Mail Adress</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.adressmail, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.adressmail, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_widget(form.adressmail, { 'attr': {'class': 'form-control','placeholder': "exemple@gmail.com"} }) }}
+                                                    {{ form_errors(form.adressmail, { 'attr': {'class': 'text-danger'} }) }}
 
                                                 </div>
                                             </div>
                                         <div class="form-group">
                                             <label class="col-2 col-form-label" >Payment Mode</label>
                                             <div class="col-10">
-                                                {{ form_widget(form.modePaiment , { 'attr': {'class': 'form-control'} }) }}
-                                                {{ form_errors(form.modePaiment , { 'attr': {'class': 'form-control'} }) }}
+                                                {{ form_widget(form.modePaiment , { 'attr': {'class': 'form-control','placeholder': "Payment mode"} }) }}
+                                                {{ form_errors(form.modePaiment , { 'attr': {'class': 'text-danger'} }) }}
 
                                             </div>
                                             <div class="form-group text-center">
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                            
-                                            <a class="btn btn-primary" href="{{ path('indexFront') }}">Retour</a>
+                                            <a class="btn btn-primary" href="{{ path('app_equipement_index') }}">Retour a la liste des produits</a>
 </div>
 </section>
                                             {{ form_end(form) }}

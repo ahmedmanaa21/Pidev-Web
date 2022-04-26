@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
+
 
 /**
  * @Route("/commande")
@@ -92,5 +95,40 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+      /**
+     * @Route("/stats", name="stats")
+     */
+    public function statistiques(ChartBuilderInterface $chartBuilder): Response {
+      
+       
+
+
+    }
+
+
+
+/**
+     * @Route("/searchEquipement", name="searchEquipement")
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $requestString = $request->get('q');
+        $commandes =  $em->getRepository(Commande::class)->findEntitiesByString($requestString);        
+        if(!$commandes) {
+            $result['commande']['error'] = "Commande Introuvable 🙁 ";
+        } else {
+            $result['commande'] = $this->getEntities($commandes);
+        }
+        return new Response(json_encode($result));
+    }
+    public function getEntities($commandes){
+        foreach ($commandes as $commande){
+            $Entities[$commande->getIdCmd()] = [$commande->getNom(),$commande->getPrenom(),$commande->getNumTel(),$commande->Etat()];
+
+        }
+        return $Entities;
     }
 }
