@@ -25,17 +25,19 @@
                 <td>
                    <a href="{{ path('app_offre_show', {'idPromotion': offre.idPromotion}) }}"class="btn btn-primary">Afficher</a>
                  <a href="{{ path('app_offre_edit', {'idPromotion': offre.idPromotion}) }}"class="btn btn-primary">modifier</a>
-
+                
                 </td>
             </tr>
         {% else %}
+
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
+     
         </tbody>
     </table>
-
+<a href="{{ path('pdf')}}" class="btn btn-success">Extracter les offres</a>
     <a href="{{ path('app_offre_new') }}">Create new</a>
     </div>
 {% endblock %}

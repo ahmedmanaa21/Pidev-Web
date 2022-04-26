@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use App\service\MailerService;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 /**
  * @Route("/offre")
  */
@@ -78,6 +80,66 @@ class OffreController extends AbstractController
         ]);
     }
 
+
+
+
+
+
+
+
+
+
+
+/**
+     * @Route("/pdf", name="pdf", methods={"GET","POST"})
+     */
+    public function offrepdf( OffreRepository $offreRepository)
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('offre/mypdf.html.twig', [
+            'offres' => $offreRepository->findAll()
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * @Route("/{idPromotion}", name="app_offre_show", methods={"GET"})
      */
@@ -120,4 +182,19 @@ class OffreController extends AbstractController
 
         return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

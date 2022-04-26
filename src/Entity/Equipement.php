@@ -66,6 +66,8 @@ class Equipement
             return;
         }
 
+        
+
 
         $this->getFile()->move(
             $this->getUploadRootDir(),
@@ -79,9 +81,6 @@ class Equipement
         // clean up the file property as you won't need it anymore
         $this->file = null;
     }
-
-
-
 
 
     /**

@@ -1,11 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Equipement index{% endblock %}
-
 {% block body %}
 <container>
     <h1>Equipement</h1>
+    {% for message in app.flashes('info') %}
+    <div class="alert alert success">
+    {{ message}}
+    </div>
+  {% endfor %}
+<div class="sidebar-search">
 
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="Search here">
+                </div>
+                <!-- /input-group -->
+            </div>
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="#"> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level" id="entitiesNav">
+                    </ul>
+                </li>
+            </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchEquipement') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'equipement') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+                                                        console.log(value[0]);
+                                                        entitySelector.append('<li><b>'+value[0]+'</b><a href="/programme_show/'+id+'">'+'<img src="picture/'+value[1]+' " style="width: 50px; height: 50px"/>'+'</a></li>');
+                                                       //entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[1]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+
+
+
+
+  
     <table class="table">
         <thead>
             <tr class="table-primary">
@@ -20,6 +90,7 @@
         <tbody>
         {% for equipement in equipements %}
             <tr>
+
                 <td>{{ equipement.refEquipement }}</td>
                 <td>{{ equipement.nomEquipement }}</td>
                 <td><img src="{{ asset('Upload/')}}{{ equipement.image }}"alt=""style="width: 200px;height:200px"></td>
@@ -28,6 +99,7 @@
                 <td>
                     <a href="{{ path('app_equipement_show', {'refEquipement': equipement.refEquipement}) }}"class="btn btn-primary">Afficher</a>
                     <a href="{{ path('app_equipement_edit', {'refEquipement': equipement.refEquipement}) }}"class="btn btn-primary">Modifier</a>
+                  
                 </td>
             </tr>
         {% else %}
@@ -35,6 +107,7 @@
                 <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
+        {{ knp_pagination_render(equipements) }}
         </tbody>
     </table>
 

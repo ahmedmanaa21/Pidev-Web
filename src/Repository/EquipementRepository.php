@@ -73,4 +73,17 @@ class EquipementRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT e
+                FROM App:Equipement e
+                WHERE e.nomEquipement LIKE :str OR e.descriptionEquipement LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+   
+
 }
