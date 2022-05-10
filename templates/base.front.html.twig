@@ -6,15 +6,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tour & Travel Bootstrap Template | Themez Hub</title>
-
+    <title>CampersDen Web</title>
+    <link rel="icon" href="{{ asset('assets/img/logo.jpg')}}" />
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/css/plugins.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
     <!-- Custom style -->
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/responsiveness.css')}}" rel="stylesheet" />
     <link id="jssDefault" rel="stylesheet" href="{{ asset('assets/css/skins/default.css')}}" />
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_077adc50c3365ca17ad9ef9f7b8470d68'
+        });
+    </script>
 </head>
 
 <body>
@@ -27,8 +39,8 @@
             <i class="fa fa-bars"></i>
           </button>
                 <a class="navbar-brand" href="{{ path ('indexFront') }}">
-                    <img src="{{ asset('assets/img/culinaira.png')}}" class="logo logo-display" alt="" />
-                    <img src="{{ asset('assets/img/culinaira.png')}}" class="logo logo-scrolled" alt="" />
+                    <img src="{{ asset('assets/img/logo.png')}}" class="logo logo-display" alt="" />
+                    <img src="{{ asset('assets/img/logo.png')}}" class="logo logo-scrolled" alt="" />
                 </a>
             </div>
             <!-- End Logo Header Navigation -->
@@ -43,7 +55,7 @@
                     <li class="dropdown megamenu-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services</a
               >
-              <ul class="dropdown-menu megamenu-content" role="menu">
+                <ul class="dropdown-menu megamenu-content" role="menu">
                 <li>
                   <div class="row">
                     <div class="col-menu col-md-3">
@@ -51,14 +63,17 @@
                       <div class="content">
                         <ul class="menu-col">
                           <li>
-                            <a href="destination-grid.html"
+                            <a href="{{ path('zonecampingFront') }}"
                               >Camping Areas available</a
                             >
                           </li>
+                            <li>
+                                <a href="{{ path('app_evenement_front') }}"
+                                >Events</a
+                                >
+                            </li>
                           <li>
-                            <a href="destination-list.html"
-                              >Equipments</a
-                            >
+                            <a href={{path('equiFront')}}>Equipments</a>
                           </li>
                         </ul>
                       </div>
@@ -68,8 +83,8 @@
                       <h6 class="title">Reclamations</h6>
                       <div class="content">
                         <ul class="menu-col">
-                          <li><a href="tour-grid.html">Pass réclamaions</a></li>
-                    <li><a href="tour-list.html">Show Reclamaions</a></li>
+                          <li><a href="{{ path('app_reclamation_new') }}">Pass réclamaions</a></li>
+                    <li><a href="{{ path('app_reclamation_index') }}">Show Reclamaions</a></li>
                 </ul>
             </div>
         </div>
@@ -79,8 +94,8 @@
                       <h6 class="title">Reservation</h6>
                       <div class="content">
                         <ul class="menu-col">
-                          <li><a href="tour-grid.html">Pass Reservation</a></li>
-                    <li><a href="tour-list.html">Show Reservation</a></li>
+                          <li><a href="{{ path('app_reservation_new') }}">Pass Reservation</a></li>
+                    <li><a href="{{ path('app_reservation_index') }}">Show Reservation</a></li>
                 </ul>
             </div>
         </div>
@@ -89,9 +104,7 @@
             <h6 class="title">Others</h6>
             <div class="content">
                 <ul class="menu-col">
-				    <li><a href="hotel-grid.html">Reservations</a></li>
-                    <li><a href="hotel-grid.html">Our Offers</a></li>
-                    <li><a href="hotel-list.html">Cart</a></li>
+                    <li><a href={{path('offreFront')}}>Our Offers</a></li>
                 </ul>
             </div>
         </div>
@@ -103,30 +116,20 @@
         </li>
 
         <li>
-            <a href="hire-guider.html">Find Guide</a>
+            <a href="{{ asset('hire-guider.html')}}">Find Guide</a>
         </li>
 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Extra</a
               >
               <ul class="dropdown-menu animated fadeOutUp">
-                <li><a href="cart.html">Add To Cart</a></li>
-        <li><a href="payment-methode.html">Paayment Methode</a></li>
-        <li><a href="success-page.html">Success Page</a></li>
-        <li><a href="coming-soon.html">Coming Soon</a></li>
-        <li><a href="about-us.html">About Us</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="services.html">Services</a></li>
+        <li><a href="payment-methode.html">Payment Methods</a></li>
         <li class="dropdown">
             <a href="#">View More</a>
             <ul class="dropdown-menu">
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="faqs.html">FAQs</a></li>
-                <li><a href="login.html">LogIn</a></li>
-                <li><a href="signup.html">SignUp</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="icons.html">icons</a></li>
-                <li><a href="404.html">404</a></li>
+                <li><a href="{{ asset('blog.html')}}">Blog</a></li>
+                <li><a href="{{ asset('faqs.html')}}">FAQs</a></li>
+                <li><a href="{{ asset('contact.html')}}">Contact</a></li>
             </ul>
         </li>
         </ul>
@@ -134,11 +137,20 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="br-right">
-                <a href="javascript:void(0)" data-toggle="modal" data-target="#signin"><i class="login-icon ti-user"></i>Login</a
-              >
-            </li>
-            <li class="sign-up">
+        {% if app.user %}
+        <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown dash-link"><a href="#" class="dropdown-toggle"><img src="{{ asset('images/' ~ app.user.image) }}" class="img-responsive avatar" alt="" />{{app.user.getNomprenom}}</a>
+                    <ul class="dropdown-menu left-nav">
+                        <li><a href="{{ path('app_client_show', {'cin': app.user.getCin }) }}">My Profile</a></li>
+                        <li><a class="btn-signup red-bt" href="{{ path('app_logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+                <li class="sign-up">
+                    <a class="btn-signup red-btn" href="{{path("vp_vpp")}}"
+                    ><span class="ti-briefcase"></span>Cart</a>
+                </li>
+        {% else %}
+              <li class="sign-up">
               <a class="btn-signup red-bt" href="{{ path ('app_login') }}"
                 ><span class=""></span>Login</a
               >
@@ -148,12 +160,8 @@
                 ><span class=""></span>SignUp</a
               >
             </li>
-            <li class="sign-up">
-              <a class="btn-signup red-btn" href="tour-grid-sidebar.html"
-                ><span class="ti-briefcase"></span>Cart</a
-              >
-            </li>
-            
+
+        {% endif %}
           </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -304,7 +312,7 @@
           <div class="modal-body">
             <div class="text-center">
               <img
-                src="{{ asset('assets/img/culinaira.png')}}"
+                src="{{ asset('assets/img/logo.png')}}"
                 class="img-responsive"
                 alt=""
               />
@@ -319,7 +327,7 @@
                   href="#employer"
                   role="tab"
                 >
-                  <i class="ti-user"></i> Authentification</a
+                  <i class="ti-user"></i> LogIn</a
                 >
               </li>
               <li class="nav-item">
@@ -329,7 +337,7 @@
                   href="#candidate"
                   role="tab"
                 >
-                  <i class="ti-user"></i> S'inscrire</a
+                  <i class="ti-user"></i> SignUp </a
                 >
               </li>
             </ul>
@@ -490,6 +498,19 @@
                         <!-- /Switcher -->
 
                         <!-- =================== START JAVASCRIPT ================== -->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/625b1257b0d10b6f3e6de5c6/1g0prv9k5';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
                         <script src="{{ asset('assets/plugins/js/jquery.min.js')}}"></script>
                         <script src="{{ asset('assets/plugins/js/bootstrap.min.js')}}"></script>
                         <script src="{{ asset('assets/plugins/js/viewportchecker.js')}}"></script>
@@ -584,6 +605,34 @@
                                 $("#styleOptions").styleSwitcher();
                             });
                         </script>
+    <script src="//code.jquery.com/jquery.js"></script>
+
+    <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+    {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+    {% if app.user %}
+    <script>
+        var x = document.getElementById("cin-label");
+        var z=x.getElementsByClassName("current")[0];
+
+
+        let cin = {{app.user.getCin}};
+
+        z.innerHTML= cin;
+
+        var ul = x.getElementsByTagName("ul")[0].children;
+        console.log(ul);
+        for(let i =0;i<ul.length;i++)
+        {
+            if(ul[i].classList.contains("selected"))
+                ul[i].classList.remove("selected");
+            if(ul[i].getAttribute("data-value")==cin)
+                ul[i].classList.add("selected");
+        }
+
+    </script>
+    {% endif %}
+
 </body>
 
 <!-- Mirrored from codeminifier.com/travel-stock-demo/home-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Feb 2022 22:31:33 GMT -->

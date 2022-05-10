@@ -63,22 +63,22 @@ class Admin implements UserInterface
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
      * @Assert\NotBlank
-     * @Assert\Length(
-     * min=3,
-     * max=15,
-     * minMessage = "le mot de passe de client doit comporter au moins {{ limit }}caractéres",
-     * maxMessage = "le mot de passe de client doit comporter au plus {{ limit }} caractéres"
-     *)
+     * @Assert\Email(
+     *     message = "L'e-mail '{{ value }}' n'est pas un e-mail valide.",
+     *     checkMX = true
+     * )
+     * 
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mdp", type="string", length=15, nullable=false)
+     * @ORM\Column(name="mdp", type="string", length=255, nullable=false)
      * @Assert\NotBlank
+     *
      */
-    private $mdp;
+    private $password;
 
     /**
      * @var int
@@ -94,6 +94,11 @@ class Admin implements UserInterface
      */
     private $numtel;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,9 @@ class Admin implements UserInterface
         return $this->nom;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
@@ -135,18 +143,6 @@ class Admin implements UserInterface
         return $this;
     }
 
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
-
     public function getNumtel(): ?string
     {
         return $this->numtel;
@@ -159,15 +155,33 @@ class Admin implements UserInterface
         return $this;
     }
 
-    public function getRoles()
+    public function setRoles(array $roles): self
     {
-        // TODO: Implement getSalt() method.
+        $this->roles = $roles;
+
+        return $this;
     }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        $roles[] = 'ROLE_ADMIN';
+
+        return array_unique($roles);
+    }
+    /**
+     * @see UserInterface
+     */
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
     }
-
+    /**
+     * @see UserInterface
+     */
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
@@ -177,9 +191,18 @@ class Admin implements UserInterface
     {
         // TODO: Implement getUsername() method.
     }
+    /**
+     * @see UserInterface
+     */
     public function getPassword()
     {
-        return $this->mdp;
+        return $this->password;
+    }
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+
+        return $this;
     }
 
 }

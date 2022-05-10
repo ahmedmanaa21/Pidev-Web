@@ -3,7 +3,6 @@
 <section>
 <div class="container">
                                         <form class="form-horizontal" role="form">
-<h1>Create your CampersDen Account and join us !</h1>
 
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label">Cin :</label>
@@ -50,8 +49,8 @@
                                             <div class="form-group">
                                                 <label class="col-2 col-form-label" >Password :</label>
                                                 <div class="col-10">
-                                                    {{ form_widget(form.mdp, { 'attr': {'class': 'form-control'} }) }}
-                                                    {{ form_errors(form.mdp) }}
+                                                    {{ form_widget(form.password, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.password) }}
 
                                                 </div>
                                             </div>
@@ -79,10 +78,18 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group text-center">
-                                            <input type="submit" value="SignUp"   class="btn theme-btn full-width btn-m" >
+                                            <div class="form-group">
+                                                <label class="col-2 col-form-label" >Are you a robot ?</label>
+                                                <div class="col-10">
+                                                    {{ form_widget(form.captchaCode, { 'attr': {'class': 'form-control'} }) }}
+                                                    {{ form_errors(form.captchaCode) }}
+
+                                                </div>
                                             </div>
-                                            <a class="btn btn-primary" href="{{ path('indexFront') }}">Retour</a>
+                                            <div class="form-group text-center">
+                                            <button class="btn theme-btn full-width btn-m">{{ button_label|default('SignUp') }}</button>
+                                            </div>
+                                            <a class="btn btn-primary" href="{{ path('indexFront') }}">Cancel</a>
 </div>
 </section>
                                             {{ form_end(form) }}

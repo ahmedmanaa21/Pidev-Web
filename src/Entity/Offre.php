@@ -3,13 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+use App\Repository\OffreRepository;
 /**
  * Offre
  *
  * @ORM\Table(name="offre", indexes={@ORM\Index(name="ref_equipement", columns={"ref_equipement"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=OffreRepository::class)
  */
+ 
 class Offre
 {
     /**
@@ -23,13 +26,24 @@ class Offre
 
     /**
      * @var \DateTime
+    
      *
      * @ORM\Column(name="date_debutpromo", type="date", nullable=false)
+       *  @Assert\Range(
+     *      min = "now",
+     *    minMessage = "Veuillez sélectionner une date supérieur à maintenant"
+     * )
+     * @Groups("post:read")
      */
     private $dateDebutpromo;
 
     /**
      * @var \DateTime
+     * @Assert\Range(
+     *      min = "now",
+     *    minMessage = "Veuillez sélectionner une date supérieur à maintenant"
+     * )
+     * @Groups("post:read")
      *
      * @ORM\Column(name="date_finpromo", type="date", nullable=false)
      */
@@ -104,6 +118,9 @@ class Offre
 
         return $this;
     }
-
+ public function __toString(){
+        $date=strval($this->dateDebutpromo);
+        return $date;
+    }
 
 }

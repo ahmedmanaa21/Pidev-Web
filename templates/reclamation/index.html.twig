@@ -1,0 +1,71 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+
+<section>
+    <div calss="container">
+
+        <h1 style="text-align: center !important;">Liste de réservation</h1>
+        <br>
+        <br>
+        <br><br>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#rech tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+        <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+
+
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Type of Reclamation</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Cin</th>
+                <th>Archived</th>
+                <th>Screenshot</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="rech">
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.typeRec }}</td>
+                <td>{{ reclamation.descriptionRec }}</td>
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.cin }}</td>
+                <td>{{ reclamation.archived ? 'Yes' : 'No' }}</td>
+                <td>
+
+                    <img src="{{ asset('images/' ~ reclamation.screenshot) }}" alt="" width="500" height="120" >
+
+                </td>
+                <td>{{ reclamation.email }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_show', {'idRec': reclamation.idRec}) }}"class="btn btn-primary">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</section>
+    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+{% endblock %}

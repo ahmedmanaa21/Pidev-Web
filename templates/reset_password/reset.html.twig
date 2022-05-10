@@ -1,0 +1,26 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1>Reset your password</h1>
+            <br>
+            {{form_start(resetForm,{attr: { novalidate : 'novalidate' }})  }}
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <div class="col-10">
+                        <label class="col-2 col-form-label">New Password :</label>
+                        {{ form_widget(resetForm.plainPassword.first, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(resetForm.plainPassword.first) }}
+                        <label class="col-2 col-form-label">Password Confirmation :</label>
+                        {{ form_widget(resetForm.plainPassword.second, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(resetForm.plainPassword.second) }}
+                    </div><br>
+                    <button class="btn theme-btn full-width btn-m">Reset password</button>
+                    {{ form_end(resetForm) }}
+    </section>
+    </div>
+{% endblock %}

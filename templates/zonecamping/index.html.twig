@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zones de camping {% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <h1 style="text-align: center !important;">Zones de camping</h1><br><br>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#myInput").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#rech tr").filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+        </script>
+        <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Delegation</th>
+                <th>NomCentre</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="rech">
+        {% for zonecamping in zonecampings %}
+            <tr>
+                <td>{{ zonecamping.region }}</td>
+                <td>{{ zonecamping.delegation }}</td>
+                <td>{{ zonecamping.nomCentre }}</td>
+                <td>{{ zonecamping.latitude }}</td>
+                <td>{{ zonecamping.longitude }}</td>
+                <td>{{ zonecamping.description }}</td>
+                <td>
+                    <a href="{{ path('app_zonecamping_show', {'id': zonecamping.id}) }}" class="btn btn-primary">show</a>
+                    <a href="{{ path('app_zonecamping_edit', {'id': zonecamping.id}) }}"  class="btn btn-secondary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-dark btn-icon-text" href="{{ path('app_zonecamping_new') }}">Create new</a>
+    </div>
+</section>
+
+    {{ knp_pagination_render(zonecampings) }}
+
+{% endblock %}

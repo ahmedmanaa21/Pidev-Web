@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Reclamation
  *
- * @ORM\Table(name="reclamation")
+ * @ORM\Table(name="reclamation", indexes={@ORM\Index(name="FK_rec_cin", columns={"cin"})})
  * @ORM\Entity
  */
 class Reclamation
@@ -30,22 +32,34 @@ class Reclamation
 
     /**
      * @var string
+
      *
      * @ORM\Column(name="description_rec", type="text", length=65535, nullable=false)
+     * @Assert\Length(
+     * min=10,
+     * max=100,
+     * minMessage = "la description doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "la description doit comporter au plus {{ limit }} caractéres"
+     * )
      */
     private $descriptionRec;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_rec", type="date", nullable=false, options={"default"="current_timestamp()"})
+     * @ORM\Column(name="date_rec", type="date", nullable=false)
+     * @Assert\Date()
+     * @Assert\EqualTo("today")
      */
-    private $dateRec = 'current_timestamp()';
+    private $dateRec;
 
     /**
-     * @var int
+     * @var \Client
      *
-     * @ORM\Column(name="cin", type="bigint", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Client")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(name="cin", referencedColumnName="cin")
+     * })
      */
     private $cin;
 
@@ -67,6 +81,10 @@ class Reclamation
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @Assert\Email(
+     *     message = "L'e-mail '{{ value }}' n'est pas un e-mail valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -104,19 +122,19 @@ class Reclamation
         return $this->dateRec;
     }
 
-    public function setDateRec(\DateTimeInterface $dateRec): self
+    public function setDateRec(?\DateTimeInterface $dateRec): self
     {
         $this->dateRec = $dateRec;
 
         return $this;
     }
 
-    public function getCin(): ?string
+    public function getCin(): ?Client
     {
         return $this->cin;
     }
 
-    public function setCin(string $cin): self
+    public function setCin(?Client $cin): self
     {
         $this->cin = $cin;
 

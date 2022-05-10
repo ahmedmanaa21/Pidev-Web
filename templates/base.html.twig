@@ -98,23 +98,29 @@
                   <i class="flag-icon flag-icon-ru"></i> Russian </a>
               </div>
             </li>
+            {% if app.user %}
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ml-2" src="{{ asset('images/faces/face8.jpg')}}" alt="Profile image"> <span class="font-weight-normal"> Ahmed Manaa </span></a>
+                <img class="img-xs rounded-circle ml-2" src="{{ asset('images/faces/face8.jpg')}}" alt="Profile image"> <span class="font-weight-normal"> {{app.user.getNom}} {{app.user.getPrenom}} </span></a>
+
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="{{ asset('images/faces/face8.jpg')}}" alt="Profile image">
-                  <p class="mb-1 mt-3">Ahmed Manaa</p>
-                  <p class="font-weight-light text-muted mb-0">ahmed.manaa@gmail.com</p>
+                  <p class="mb-1 mt-3">{{app.user.getNom}} {{app.user.getPrenom}}</p>
+                  <p class="font-weight-light text-muted mb-0">{{app.user.getEmail}}</p>
                 </div>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
+                <a class="dropdown-item" href="{{ path('app_admins_show', {'id': app.user.getid }) }}"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>
                 <a class="dropdown-item"><i class="dropdown-item-icon icon-question text-primary"></i> FAQ</a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                <a class="dropdown-item" href="{{ path ('app_logout') }}"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
               </div>
             </li>
           </ul>
+          {% else %}
+            <a class="btn btn-outline-primary btn-icon-text" href="{{ path ('app_loginBack') }}"
+            ><span class=""></span>Login</a
+            >
+          {% endif %}
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="icon-menu"></span>
           </button>
@@ -125,22 +131,7 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            <li class="nav-item nav-profile">
-              <a href="#" class="nav-link">
-                <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ asset('images/faces/face8.jpg')}}" alt="profile image">
-                  <div class="dot-indicator bg-success"></div>
-                </div>
-                <div class="text-wrapper">
-                  <p class="profile-name">Ahmed Manaa</p>
-                  <p class="designation">Administrator</p>
-                </div>
-                <div class="icon-container">
-                  <i class="icon-bubbles"></i>
-                  <div class="dot-indicator bg-danger"></div>
-                </div>
-              </a>
-            </li>
+
             <li class="nav-item nav-category">
               <span class="nav-link">Home</span>
             </li>
@@ -151,7 +142,7 @@
               </a>
             </li>
             <li class="nav-item nav-category"><span class="nav-link">UI Elements</span></li>
-            
+            {% if app.user %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path ('app_admins_index') }}">
                 <span class="menu-title">Gestion Admins</span>
@@ -165,48 +156,48 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path('app_equipement_new') }}">
                 <span class="menu-title">Gestion Equipements</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path('indexBackrec') }}">
                 <span class="menu-title">Gestion Reclamation</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path('indexBack') }}">
                 <span class="menu-title">Gestion Reservations</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path('app_offre_index') }}">
                 <span class="menu-title">Gestion Offre</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path('app_commande_index') }}">
                 <span class="menu-title">Gestion Commandes</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path ('app_zonecamping_index') }}">
                 <span class="menu-title">Gestion Zone de Camping</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
+              <a class="nav-link" href="{{ path ('app_evenement_index') }}">
                 <span class="menu-title">Gestion Evenements</span>
                 <i class="icon-book-open menu-icon"></i>
               </a>
             </li>
-            
+            {% else %}
             <li class="nav-item nav-category"><span class="nav-link">Sample Pages</span></li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -223,8 +214,10 @@
                 </ul>
               </div>
             </li>
-            
+
           </ul>
+            {% endif %}
+
         </nav>
 
     
@@ -247,5 +240,6 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('js/dashboard.js')}}"></script>
     <!-- End custom js for this page -->
+
   </body>
 </html>

@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+{% block stylesheets %}
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+
+  
+<div class="row">
+  <div class="col-6">
+    <h1>Commandes</h1> </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#rech tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+    <br>
+<div class="col-md-20">
+    <table class="table table-dark">
+        <thead>
+            <tr class="bg-success">
+                <th>IdCmd</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>NumTel</th>
+                <th>Codepostal</th>
+                <th>Etat</th>
+                <th>Adressmail</th>
+                <th>ModePaiment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="rech">
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.idCmd }}</td>
+                <td>{{ commande.nom }}</td>
+                <td>{{ commande.prenom }}</td>
+                <td>{{ commande.numTel }}</td>
+                <td>{{ commande.codepostal }}</td>
+                <td>{{ commande.etat }}</td>
+                <td>{{ commande.adressmail }}</td>
+                <td>{{ commande.modePaiment }}</td>
+                <td>
+                    <a button type="button" class="btn btn-outline-success" href="{{ path('app_commande_show', {'idCmd': commande.idCmd}) }}">show</a>
+                    <a button type="button"class="btn btn-outline-success" href="{{ path('app_commande_edit', {'idCmd': commande.idCmd}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
+  </div>
+{% endblock %}
+
+    

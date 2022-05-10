@@ -3,52 +3,50 @@
 {% block title %}Client{% endblock %}
 
 {% block body %}
-    <h1>Client</h1>
+<section>
+<div class="container">
+    <h1>Your Profile</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Cin</th>
+                <th>Cin :</th>
                 <td>{{ client.cin }}</td>
             </tr>
             <tr>
-                <th>Nomprenom</th>
+                <th>Full Name :</th>
                 <td>{{ client.nomprenom }}</td>
             </tr>
             <tr>
-                <th>Surnom</th>
+                <th>Username :</th>
                 <td>{{ client.surnom }}</td>
             </tr>
             <tr>
-                <th>Sexe</th>
+                <th>Gender :</th>
                 <td>{{ client.sexe }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>Email :</th>
                 <td>{{ client.email }}</td>
             </tr>
             <tr>
-                <th>Mdp</th>
-                <td>{{ client.mdp }}</td>
-            </tr>
-            <tr>
-                <th>Datenaissance</th>
+                <th>Birthday date :</th>
                 <td>{{ client.datenaissance ? client.datenaissance|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Adresse</th>
+                <th>Adress :</th>
                 <td>{{ client.adresse }}</td>
             </tr>
             <tr>
-                <th>Image</th>
-                <td>{{ client.image }}</td>
+                <th>Photo :</th>
+                <td><img src="{{ asset('images/' ~ client.image) }}" alt="" width="90" height="90" "></td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
-
-    <a href="{{ path('app_client_edit', {'cin': client.cin}) }}">edit</a>
-
+    <a class="btn theme-btn full-width btn-m" href="{{ path('app_client_edit', {'cin': client.cin}) }}">edit</a>
+    <br><br>
     {{ include('client/_delete_form.html.twig') }}
+</section>
+</div>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Zonecamping{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+    <h1>Nouvelle zone de camping</h1>
+
+    {{ include('zonecamping/_form.html.twig') }}
+
+    <a class="btn btn-dark btn-icon-text" href="{{ path('app_zonecamping_index') }}">back to list</a>
+    </div>
+</section>
+{% endblock %}

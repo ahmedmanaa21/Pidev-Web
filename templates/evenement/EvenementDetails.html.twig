@@ -1,0 +1,149 @@
+{% extends 'base.front.html.twig' %}
+
+
+{% block body %}
+    <style>
+        .mystar{
+            font-size: 25px !important;
+            color: #f9d933 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="container" style="text-align: center !important;"><br><br><br>
+        <h1>Event details</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <span class="theme-cl"> </span>
+                    <h1></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+                <!-- Single Destination -->
+                <div class="col-md-12 col-md-12" style="text-align: center !important;">
+                    <article class="destination-box style-1">
+                        <div class="destination-box-image">
+                            <figure>
+                                <a href="#">
+                                    <img
+                                            src="{{ asset('Upload/')}}{{ evenements.image }}"
+                                            class="img-responsive listing-box-img"
+                                            alt=""
+                                    />
+                                    <div class="list-overlay"></div>
+                                </a>
+
+                                <h4 class="destination-place">
+                                    <a href="#">{{ evenements.nom}} </a>
+                                </h4>
+
+                            </figure>
+                        </div>
+
+                        <div class="entry-meta">
+                            <div class="meta-item meta-comment fl-right">
+                        <span class="text-through"></span>
+
+
+                            </div>
+                        </div>
+
+                        <div class="inner-box">
+                            <div class="box-inner-ellipsis">
+                                <h4 class="entry-location">
+                                    <a href="#">Descripton :{{evenements.description}}</a><br>
+                                    <a href="#">Start Date :{{ evenements.dateDeb ? evenements.dateDeb|date('Y-m-d') : '' }}</a><br>
+                                    <a href="#">End Date :{{ evenements.dateFin ? evenements.dateFin|date('Y-m-d') : '' }}</a><br>
+
+                                </h4>
+                                <div class="price-box">
+                                    <div class="destination-price fl-right">
+                                        <a href="#"><i class="theme-cl ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+        </div>
+
+        <div class="col-md-6" >
+            <div style="display: flex; " >
+
+                <span style="cursor:pointer" class="fa fa-star-o mystar"></span>
+                <span style="cursor:pointer" class="fa fa-star-o mystar"></span>
+                <span style="cursor:pointer" class="fa fa-star-o mystar"></span>
+                <span style="cursor:pointer" class="fa fa-star-o mystar"></span>
+                <span style="cursor:pointer" class="fa fa-star-o mystar"></span>
+                &nbsp; &nbsp;&nbsp;&nbsp;
+                <button id="btnVote" class="btn btn-success">Vote</button>
+
+
+            </div>
+
+        </div>
+        <a href="{{ path('app_evenement_front') }}" class="btn btn-success" >Cancel</a>
+    </div>
+
+
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+        // Starrr plugin (https://github.com/dobtco/starrr)
+        var __slice = [].slice;
+        $("#btnVote").click(function () {
+            var number = $(".fa-star").length;
+            swal("Good job","Votre vote de  "+number+" étoiles est bien récu","success" );
+            console.log({number});
+            var obj = {
+                "rate" :number,
+                "evenement" : {{ evenements.id }}
+            }
+            $.ajax({
+                url: '{{ path('rating') }}',
+                type: 'post',
+                data: JSON.stringify(obj),
+                success: function (result) {
+                    console.log(result);
+                    fillStars(result-1);
+                }
+            });
+            console.log(number);
+        })
+        $(document).ready(function () {
+            $(".mystar").each(function (i,e) {
+                $(this).click(function () {
+                    fillStars(i);
+                })
+            })
+            fillStars(Math.round({{ evenements.rate-1 }}));
+        });
+        function fillStars(index) {
+            $(".mystar").each(function (i,e) {
+                if(i<=index){
+                    $(this).removeClass();
+                    $(this).addClass("fa fa-star mystar");
+                }else{
+                    $(this).removeClass();
+                    $(this).addClass("fa fa-star-o mystar");
+                }
+            })
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+{% endblock %}

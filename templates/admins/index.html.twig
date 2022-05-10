@@ -3,47 +3,66 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section>
-<div class="container">
-    <h1>Gestion Admins</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Mdp</th>
-                <th>Numtel</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for admin in admins %}
-            <tr>
-                <td>{{ admin.id }}</td>
-                <td>{{ admin.nom }}</td>
-                <td>{{ admin.prenom }}</td>
-                <td>{{ admin.email }}</td>
-                <td>{{ admin.mdp }}</td>
-                <td>{{ admin.numtel }}</td>
-                <td>
-                    <a class="btn theme-btn full-width btn-m" href="{{ path('app_admins_show', {'id': admin.id}) }}">show</a>
-                    <a class="btn theme-btn full-width btn-m" href="{{ path('app_admins_edit', {'id': admin.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section>
+        <div class="container">
+            <h1>Gestion Admins</h1>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $("#myInput").on("keyup", function() {
+                        var value = $(this).val().toLowerCase();
+                        $("#rech tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+            </script>
+            <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th>Numero telephone</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="rech">
+                {% for admin in admins %}
+                    <tr>
+                        <td>{{ admin.id }}</td>
+                        <td>{{ admin.nom }}</td>
+                        <td>{{ admin.prenom }}</td>
+                        <td>{{ admin.email }}</td>
+                        <td>{{ admin.numtel }}</td>
+                        <td>
+                            <a class="btn btn-danger btn-icon-text" href="{{ path('app_admins_show', {'id': admin.id}) }}">show</a>
+                            <a class="btn btn-dark btn-icon-text" href="{{ path('app_admins_edit', {'id': admin.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="d-flex mt-4 flex-wrap">
+                <nav class="ml-auto">
+            <ul class="pagination separated pagination-info">
+            {{ knp_pagination_render(admins) }}
+            </ul>
+                </nav>
+            </div>
 
-<div class="form-group text-center">
-    <a class="btn theme-btn full-width btn-m" href="{{ path('app_admins_new') }}">Add new</a>
-    </div>
+
+            <div class="form-group text-center">
+                <a class="btn btn-dark btn-icon-text" href="{{ path('app_admins_new') }}">Add new</a>
+            </div>
+        </div>
     </section>
-</div>
 {% endblock %}

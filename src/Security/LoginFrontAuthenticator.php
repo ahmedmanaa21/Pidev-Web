@@ -17,11 +17,12 @@ use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
-
+use App\Repository\ClientRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 
-class LoginFrontAuthenticator extends AbstractFormLoginAuthenticator
+class LoginFrontAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
@@ -50,15 +51,23 @@ class LoginFrontAuthenticator extends AbstractFormLoginAuthenticator
     {
         $credentials = [
             'email' => $request->request->get('email'),
-            'password' => $request->request->get('mdp'),
+            'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
+
+
+        // var_dump($credentials['password']);
+        // var_dump($credentials['email']);
+        // var_dump($request);
+        // die ;
+
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
         );
 
         return $credentials;
+
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider)
@@ -68,18 +77,19 @@ class LoginFrontAuthenticator extends AbstractFormLoginAuthenticator
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(Client::class)->findOneBy(['email' => $credentials['email']]);
+        $client = $this->entityManager->getRepository(Client::class)->findOneBy(['email' => $credentials['email']]);
 
-        if (!$user) {
+
+        if (!$client) {
             throw new UsernameNotFoundException('Email could not be found.');
         }
+        return $client;
 
-        return $user;
     }
 
-    public function checkCredentials($credentials, UserInterface $user)
+    public function checkCredentials($credentials, UserInterface $client)
     {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
+        return $this->passwordEncoder->isPasswordValid($client, $credentials['password']);
     }
 
     public function getPassword($credentials): ?string
@@ -90,16 +100,14 @@ class LoginFrontAuthenticator extends AbstractFormLoginAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse('app_login');
+            return new RedirectResponse($targetPath);
         }
 
-        // For example : 
-        return new RedirectResponse($this->urlGenerator->generate('app_login'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('indexFront'));
     }
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate('app_login');
     }
 }

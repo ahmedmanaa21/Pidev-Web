@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+
+<section>
+    <div calss="container">
+
+        <h1 style="text-align: center !important;">Liste de réservation</h1>
+        <br>
+        <br>
+        <br><br>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#rech tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>IdReservation</th>
+            <th>Cin</th>
+            <th>DateReservation</th>
+            <th>Nbrpersonne</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody id="rech">
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.idReservation }}</td>
+                <td>{{ reservation.cin }}</td>
+                <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.nbrpersonne }}</td>
+                <td>
+                    <a href="{{ path('showBackR', {'idReservation': reservation.idReservation}) }}" class="btn btn-primary">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+</section>
+    {{ knp_pagination_render(reservations) }}
+
+{% endblock %}

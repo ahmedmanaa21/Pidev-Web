@@ -1,0 +1,33 @@
+
+{{ form_start(form ,{'attr': { 'novalidate ': 'novalidate' }}) }}
+<section>
+    <div class="container">
+
+        <form class="form-horizontal" role="form">
+
+            <div class="form-group">
+                <label class="col-2 col-form-label">Reservation Date :</label>
+                <div class="col-10">
+                    {{ form_widget(form.dateReservation, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.dateReservation) }}
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-2 col-form-label" >Persons number :</label>
+                <div class="col-10">
+                    {{ form_widget(form.nbrpersonne, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.nbrpersonne, { 'attr': {'class': 'form-control'} }) }}
+
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Validate"   class="btn theme-btn full-width btn-m" >
+            </div>
+            <a class="btn btn-primary" href="{{ path('app_reservation_index') }}">Cancel</a>
+
+
+    </div>
+</section>
+{{ form_end(form) }}

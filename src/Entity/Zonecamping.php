@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\ZoneCampingRepository;
 /**
  * Zonecamping
  *
  * @ORM\Table(name="zonecamping")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=ZoneCampingRepository::class)
  */
 class Zonecamping
 {
@@ -25,6 +26,12 @@ class Zonecamping
      * @var string
      *
      * @ORM\Column(name="region", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     * min=3,
+     * max=50,
+     * minMessage = "la region doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "la region de client doit comporter au plus {{ limit }} caractéres"
+     * )
      */
     private $region;
 
@@ -32,6 +39,12 @@ class Zonecamping
      * @var string
      *
      * @ORM\Column(name="delegation", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     * min=3,
+     * max=50,
+     * minMessage = "la delegation doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "la delegation doit comporter au plus {{ limit }} caractéres"
+     * )
      */
     private $delegation;
 
@@ -39,6 +52,12 @@ class Zonecamping
      * @var string
      *
      * @ORM\Column(name="nom_centre", type="string", length=255, nullable=false)
+     * @Assert\Length(
+     * min=3,
+     * max=50,
+     * minMessage = "le nom_centre doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "le nom_centre doit comporter au plus {{ limit }} caractéres"
+     * )
      */
     private $nomCentre;
 
@@ -46,20 +65,28 @@ class Zonecamping
      * @var float
      *
      * @ORM\Column(name="latitude", type="float", precision=10, scale=0, nullable=false)
+     *
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float", precision=10, scale=0, nullable=false)
+     * @ORM\Column(name="longitude", type="float", precision=10, scale=0, nullable=true)
+     *
      */
     private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     * @Assert\Length(
+     * min=3,
+     * max=50,
+     * minMessage = "la description doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "la description doit comporter au plus {{ limit }} caractéres"
+     * )
      */
     private $description;
 
@@ -140,5 +167,9 @@ class Zonecamping
         return $this;
     }
 
+    public function __toString() {
+        return (string) $this->getId();
+
+    }
 
 }

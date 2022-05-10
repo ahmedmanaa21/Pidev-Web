@@ -1,0 +1,57 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Zonecamping index{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <br><br><br><br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <span class="theme-cl"> </span>
+                    <h1>Camping Areas</h1>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            {% for zonecamping in zonescamping %}
+                <!-- Single Destination -->
+                <div class="col-md-4 col-md-6">
+                    <article class="destination-box style-1">
+                        <div class="destination-box-image">
+                            <figure>
+                                <a href="{{ path('app_zonecamping_details', {'id': zonecamping.id}) }}">
+
+                                    <img src="{{ asset('assets/img/destination/des-5.png')}}" class="img-responsive listing-box-img" alt="" />
+                                    <div class="list-overlay"></div>
+                                </a>
+
+                                <h4 class="destination-place">
+                                    <a href="{{ path('app_zonecamping_details', {'id': zonecamping.id}) }}">{{ zonecamping.nomCentre}} </a>
+                                </h4>
+
+                            </figure>
+                        </div>
+
+                        <div class="inner-box">
+                            <div class="box-inner-ellipsis">
+                                <h4 class="entry-location">
+                                    <a href="{{ path('app_zonecamping_details', {'id': zonecamping.id}) }}">{{zonecamping.description}}</a>
+                                </h4>
+                                <div class="price-box">
+                                    <div class="destination-price fl-right">
+                                        <a href="{{ path('app_zonecamping_details', {'id': zonecamping.id}) }}"><i class="theme-cl ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock %}

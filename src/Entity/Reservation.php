@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Reservation
  *
- * @ORM\Table(name="reservation", indexes={@ORM\Index(name="FK_rec_zoneC", columns={"id_zoneCamping"})})
+ * @ORM\Table(name="reservation", indexes={@ORM\Index(name="FK_rec_zoneC", columns={"id"})})
  * @ORM\Entity
  */
 class Reservation
@@ -32,6 +33,8 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="date", nullable=false)
+     * @Assert\Date()
+     * @Assert\GreaterThan("today")
      */
     private $dateReservation;
 
@@ -47,7 +50,7 @@ class Reservation
      *
      * @ORM\ManyToOne(targetEntity="Zonecamping")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_zoneCamping", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
     private $idZonecamping;

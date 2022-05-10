@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Equipement index{% endblock %}
+{% block body %}
+<container>
+    <h1>Equipement</h1>
+    {% for message in app.flashes('info') %}
+    <div class="alert alert success">
+    {{ message}}
+    </div>
+  {% endfor %}
+
+
+  
+    <table class="table">
+        <thead>
+            <tr class="table-primary">
+                <th>RefEquipement</th>
+                <th>NomEquipement</th>
+                <th>Image</th>
+                <th>PrixEquipement</th>
+                <th>DescriptionEquipement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+
+                <td>{{ equipement.refEquipement }}</td>
+                <td>{{ equipement.nomEquipement }}</td>
+                <td><img src="{{ asset('Upload/')}}{{ equipement.image }}"alt=""style="width: 200px;height:200px"></td>
+                <td>{{ equipement.prixEquipement }}</td>
+                <td>{{ equipement.descriptionEquipement }}</td>
+                <td>
+                    <a href="{{ path('app_equipement_show', {'refEquipement': equipement.refEquipement}) }}"class="btn btn-primary">Afficher</a>
+                    <a href="{{ path('app_equipement_edit', {'refEquipement': equipement.refEquipement}) }}"class="btn btn-primary">Modifier</a>
+                  
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        {{ knp_pagination_render(equipements) }}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_equipement_new') }}">Create new</a>
+    </div>
+{% endblock %}

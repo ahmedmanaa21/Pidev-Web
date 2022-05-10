@@ -1,0 +1,79 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %} Nos equipements {% endblock %}
+
+
+{% block body %}
+
+
+<div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="heading">
+              <span class="theme-cl">Top Offers</span>
+              <h1>Our Offers</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+         {% for offre in offres %}
+          <!-- Single Destination -->
+          <div class="col-md-4 col-md-6">
+            <article class="destination-box style-1">
+              <div class="destination-box-image">
+                <figure>
+                  <a href="">
+                    <img
+                      src="{{ asset('Upload/')}}{{ offre.refEquipement.image }}"
+                      class="img-responsive listing-box-img"
+                      alt=""
+                    />
+                    <div class="list-overlay"></div>
+                  </a>
+                <div class="discount-flick">{{offre.pourcentagepromo}}</div>
+                <h4 class="destination-place">
+                    <a href="destination-detail.html">{{ offre.refEquipement.nomEquipement}} </a>
+                </h4>
+                <a href="#" class="list-like left"><i class="ti-heart"></i
+                  ></a>
+                </figure>
+                </div>
+
+                <div class="entry-meta">
+                    <div class="meta-item meta-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half"></i>
+                    </div>
+                    <div class="meta-item meta-comment fl-right">
+                        <span class="text-through">{{offre.refEquipement.prixEquipement}}</span
+                  ><span class="real-price padd-l-10 font-bold">{{offre.refEquipement.prixEquipement}} DT</span>
+                   
+                    </div>
+                </div>
+
+                <div class="inner-box">
+                    <div class="box-inner-ellipsis">
+                        <h4 class="entry-location">
+                            <a href="destination-detail.html">{{offre.refEquipement.descriptionEquipement}}</a>
+                            
+                            
+                        </h4>
+                        <div class="price-box">
+                            <div class="destination-price fl-right">
+                                <a href="#"><i class="theme-cl ti-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </article>
+                </div>
+                {% endfor %}                
+                </div>                
+                </div>
+                </div>
+
+{% endblock %}

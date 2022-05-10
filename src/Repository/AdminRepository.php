@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @method Admin |null find($id, $lockMode = null, $lockVersion = null)
@@ -14,35 +15,71 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Admin []    findAll()
  * @method Admin []    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdminRepository extends ServiceEntityRepository
+class AdminRepository extends ServiceEntityRepository implements UserLoaderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Update::class);
+        parent::__construct($registry, Admin::class);
+    }
+
+    public function findallwithpagination()
+    {
+        return $this->createQueryBuilder('v')
+            ->getQuery();
+
+    }
+    public function findallwithpaginationVerif()
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.status = 2')
+            ->getQuery();
+
+    }
+    public function loadUserByUsername($email) {
+
+        return $this->createQueryBuilder('u')
+            ->where('u.email = :query')
+            ->andWhere('u.status = 1')
+            ->setParameter('query', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function loadUserByIdentifier(string $usernameOrEmail): ?Admin
+    {
+        $entityManager = $this->getEntityManager();
+
+        return $entityManager->createQuery(
+            'SELECT u
+                FROM App\Entity\Admin u
+                WHERE u.id = :query
+                OR u.email = :query'
+        )
+            ->setParameter('query', $usernameOrEmail)
+            ->getOneOrNullResult();
     }
 
     /**
-     * @throws ORMException
-     * @throws OptimisticLockException
+     * Used to upgrade (rehash) the user's password automatically over time.
      */
-    public function add(Admin $entity, bool $flush = true): void
+    public function upgradePassword(UserInterface $admin, string $newHashedPassword): void
     {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
+        if (!$admin instanceof admin) {
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($admin)));
         }
+
+        $admin->setPassword($newHashedPassword);
+        $this->_em->persist($admin);
+        $this->_em->flush();
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(Admin $entity, bool $flush = true): void
+    public function findByNom($nom)
     {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
+        return $this->createQueryBuilder('e')
+                ->where('e.nom LIKE :nom')
+                ->setParameter('nom', '%' . $nom . '%')
+                ->getQuery()
+                ->getResult();
     }
 
     // /**

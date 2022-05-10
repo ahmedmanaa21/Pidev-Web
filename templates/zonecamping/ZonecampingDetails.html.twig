@@ -1,0 +1,79 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Zonecamping index{% endblock %}
+
+{% block body %}
+    <style>
+        .mystar{
+            font-size: 25px !important;
+            color: #f9d933 !important;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="container" style="text-align: center !important;"><br><br><br>
+        <h1>Camping Areas Details</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <span class="theme-cl"> </span>
+                    <h1></h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Single Destination -->
+            <div class="col-md-12 col-md-12" style="text-align: center !important;">
+                <article class="destination-box style-1">
+                    <div class="destination-box-image">
+                        <figure>
+                            <a href="#">
+
+                                <img src="{{ asset('assets/img/destination/des-5.png')}}" class="img-responsive listing-box-img" alt="" />
+                                <div class="list-overlay"></div>
+                            </a>
+
+                            <h4 class="destination-place">
+                                <a href="#">{{zonecampings.nomCentre}} </a>
+                            </h4>
+
+                        </figure>
+                    </div>
+
+                    <div class="entry-meta">
+                        <div class="meta-item meta-comment fl-right">
+                            <span class="text-through"></span>
+
+
+                        </div>
+                    </div>
+
+                    <div class="inner-box">
+                        <div class="box-inner-ellipsis">
+                            <h4 class="entry-location">
+                                <a href="#">Descripton :{{zonecampings.description}}</a><br>
+                                <a href="#">Region :{{ zonecampings.region}}</a><br>
+                                <a href="#">Délegation :{{ zonecampings.delegation}}</a><br>
+
+                            </h4>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+        <a href="{{ path('zonecampingFront') }}" class="btn btn-success" >Cancel</a>
+        <a href="{{path("app_reservation_new", {id: zonecampings.id})}}" class="btn btn-success" >Book</a>
+
+    </div>
+
+
+
+
+
+
+{% endblock %}

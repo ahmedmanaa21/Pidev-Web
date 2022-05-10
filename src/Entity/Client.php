@@ -9,6 +9,7 @@ use phpDocumentor\Reflection\Types\True_;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="client")
  * @ORM\Entity
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email !")
  */
 class Client implements UserInterface
 {
@@ -37,14 +39,12 @@ class Client implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="nomPrenom", type="string", length=30, nullable=false , unique=true)
+     * @ORM\Column(name="nomPrenom", type="string", length=30, nullable=false )
      * @Assert\NotBlank
-     * @Assert\Length(
-     * min=3,
-     * max=50,
-     * minMessage = "le nom de client doit comporter au moins {{ limit }}caractéres",
-     * maxMessage = "le nom de client doit comporter au plus {{ limit }} caractéres"
-     *)
+     * @Assert\Regex(
+     * pattern = "/^([a-zA-Z' ]+)$/",
+     * htmlPattern = "[a-zA-Z'-'\s]*"
+     * )
      */
     private $nomprenom;
 
@@ -83,22 +83,17 @@ class Client implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="mdp", type="string", length=20, nullable=false , unique=true)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     * min=3,
-     * max=15,
-     * minMessage = "le mot de passe de client doit comporter au moins {{ limit }}caractéres",
-     * maxMessage = "le mot de passe de client doit comporter au plus {{ limit }} caractéres"
-     *)
+     * @ORM\Column(name="mdp", type="string", length=255, nullable=false )
+     *
      */
-    private $mdp;
+    private $password;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateNaissance", type="date", nullable=false)
      * @Assert\NotBlank
+     * @Assert\LessThanOrEqual("-18 years",message = "You have to be 18 years or older")
      */
     private $datenaissance;
 
@@ -107,6 +102,7 @@ class Client implements UserInterface
      *
      * @ORM\Column(name="adresse", type="string", length=11, nullable=false)
      * @Assert\NotBlank
+     *
      */
     private $adresse;
 
@@ -114,7 +110,7 @@ class Client implements UserInterface
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=1000, nullable=false)
-     * @Assert\NotBlank
+     *
      * 
      */
     private $image;
@@ -123,6 +119,8 @@ class Client implements UserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    protected $captchaCode;
 
     public function getCin(): ?string
     {
@@ -186,20 +184,7 @@ class Client implements UserInterface
 
         return $this;
     }
-    /**
-     * @see UserInterface
-     */
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
 
-    public function setMdp(string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
 
     public function getDatenaissance(): ?\DateTimeInterface
     {
@@ -244,6 +229,10 @@ class Client implements UserInterface
 
         return $this;
     }
+    
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -251,6 +240,10 @@ class Client implements UserInterface
 
         return array_unique($roles);
     }
+
+    /**
+     * @see UserInterface
+     */
     public function getSalt()
     {
         // TODO: Implement getSalt() method.
@@ -268,9 +261,33 @@ class Client implements UserInterface
     {
         return $this->surnom;
     }
+
+    /**
+     * @see UserInterface
+     */
     public function getPassword()
     {
-        return $this->mdp;
+        return $this->password;
     }
 
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+    public function __toString() {
+        return (string) $this->getCin();
+
+    }
 }

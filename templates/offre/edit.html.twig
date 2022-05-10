@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit offre{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <h1><div class="panel-heading"> Ajouter equipement</div></h1>
+            <div class="panel-body">
+                <div>
+                    {{ form_start(form) }}
+                    <div class="form-group">
+                        <h2><label>date debut promotion</label><h2>
+                        {{ form_widget(form.dateDebutpromo, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.dateDebutpromo) }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <h2><label>date fin promotion</label><h2>
+                        {{ form_widget(form.dateFinpromo, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.dateFinpromo) }}
+                    </div>
+                  
+                    <div class="form-group">
+                        <h2><label>pourcentage promotion</label><h2>
+                        {{ form_widget(form.pourcentagepromo, { 'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(form.pourcentagepromo) }}
+                    </div>
+                    
+                   {{ form_end(form) }}
+                
+                    <input type="submit" value="Enregistrer" class="btn btn-success" formnovalidate />
+
+                    
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div><!-- /.col-->
+    </div>
+{% endblock %}
+

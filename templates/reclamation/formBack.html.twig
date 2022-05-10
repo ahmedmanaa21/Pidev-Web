@@ -1,0 +1,58 @@
+
+{{ form_start(form ,{attr: { novalidate : 'novalidate' }}) }}
+
+<section>
+    <div class="card-body">
+    <div class="container">
+        <form class="forms-sample">
+
+            <div class="form-group">
+                <label>type rec :</label>
+                    {{ form_widget(form.typeRec, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.typeRec) }}
+
+            </div>
+
+            <div class="form-group">
+
+                <label>description Rec :</label>
+
+                    {{ form_widget(form.descriptionRec, { 'attr': {'class': 'form-control'} }) }}
+
+                    {{ form_errors(form.descriptionRec) }}
+            </div>
+            <div class="form-group">
+                <label> cin:</label>
+                    {{ form_widget(form.cin, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.cin, { 'attr': {'class': 'form-control'} }) }}
+                <br></br>
+            </div>
+
+            <div class="form-group">
+                <label> email:</label>
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.email) }}
+            </div>
+            <div class="form-group">
+                <label> screenshot:</label>
+                <div class="input-group col-xs-12">
+                    {{ form_widget(form.screenshot, { 'attr': {'class': 'form-control'}  }) }}
+                    {{ form_errors(form.screenshot) }}
+</div>
+            </div>
+            <div class="form-group">
+                <label> Date Reclamation :</label>
+                    {{ form_widget(form.dateRec, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(form.dateRec) }}
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-primary mr-2" >{{ button_label|default('Repondre') }}</button>
+                <a class="btn btn-primary" href="{{ path('app_reclamation_index') }}">Retour</a>
+
+            </div>
+
+    </div>
+    </div>
+</section>
+{{ form_end(form) }}

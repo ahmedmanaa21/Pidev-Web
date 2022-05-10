@@ -26,20 +26,16 @@
                 <td>{{ admin.email }}</td>
             </tr>
             <tr>
-                <th>Mdp</th>
-                <td>{{ admin.mdp }}</td>
-            </tr>
-            <tr>
-                <th>Numtel</th>
+                <th>Numero telephone</th>
                 <td>{{ admin.numtel }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_admins_index') }}">back to list</a>
+    <a class="btn btn-dark btn-icon-text" href="{{ path('app_admins_index') }}">back to list</a>
 
-    <a href="{{ path('app_admins_edit', {'id': admin.id}) }}">edit</a>
-
+    <a class="btn btn-dark btn-icon-text" href="{{ path('app_admins_edit', {'id': admin.id}) }}">edit</a>
+<br><br>
     {{ include('admins/_delete_form.html.twig') }}
     </section>
 </div>

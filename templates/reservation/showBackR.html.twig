@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Reservation</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>IdReservation</th>
+            <td>{{ reservation.idReservation }}</td>
+        </tr>
+        <tr>
+            <th>Cin</th>
+            <td>{{ reservation.cin }}</td>
+        </tr>
+        <tr>
+            <th>DateReservation</th>
+            <td>{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Nbrpersonne</th>
+            <td>{{ reservation.nbrpersonne }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('indexBack') }}">back to list</a>
+
+    {{ include('reservation/deleteBack.html.twig') }}
+{% endblock %}

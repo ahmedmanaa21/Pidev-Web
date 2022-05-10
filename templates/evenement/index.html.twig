@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <h1 style="text-align: center !important;">Evénements</h1><br><br>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $("#myInput").on("keyup", function() {
+                        var value = $(this).val().toLowerCase();
+                        $("#rech tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+            </script>
+            <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>DateDeb</th>
+                    <th>DateFin</th>
+                    <th>Image</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody id="rech">
+                {% for evenement in evenements %}
+                    <tr>
+                        <td>{{ evenement.nom }}</td>
+                        <td>{{ evenement.description }}</td>
+                        <td> Date Début :{{ evenement.dateDeb ? evenement.dateDeb|date('Y-m-d') : '' }}	</td>
+                        <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+                        <td> <img
+                                    src="{{ asset('Upload/')}}{{ evenement.image }}"  style="width: 100px;height: 100px"/>
+                        </td>
+                        <td>
+                            <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-success">show</a>
+                            <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}"class="btn btn-primary">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="btn btn-dark btn-icon-text" href="{{ path('app_evenement_new') }}">Create new</a>
+        </div>
+    </section>
+    {{ knp_pagination_render(evenements) }}
+{% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Commande
@@ -23,50 +25,69 @@ class Commande
 
     /**
      * @var string
-     *
+
+     * @Assert\NotBlank(message="nom doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre >=7 ",
+     *      maxMessage = "doit etre <=100" )
      * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
+
+
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="nom doit etre non vide")
+     *  @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+     *  @Assert\Length(
+     * min = 2,
+     * max = 50,
+     * minMessage = "doit etre >=3",
+     * maxMessage = "doit etre <=100"
+     * )
      */
     private $prenom;
 
     /**
      * @var int
-     *
+
      * @ORM\Column(name="num_tel", type="integer", nullable=false)
+     *  @Assert\NotBlank(message="nom doit etre non vide")
      */
     private $numTel;
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message="nom doit etre non vide")
      * @ORM\Column(name="codepostal", type="integer", nullable=false)
+     *
      */
     private $codepostal;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="nom doit etre non vide")
      * @ORM\Column(name="Etat", type="string", length=255, nullable=false)
      */
     private $etat;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="nom doit etre non vide")
      * @ORM\Column(name="adressmail", type="string", length=255, nullable=false)
+     *
      */
     private $adressmail;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="nom doit etre non vide")
      * @ORM\Column(name="mode_paiment", type="string", length=255, nullable=false)
+     *
      */
     private $modePaiment;
 
@@ -158,6 +179,7 @@ class Commande
 
         return $this;
     }
+
 
 
 }

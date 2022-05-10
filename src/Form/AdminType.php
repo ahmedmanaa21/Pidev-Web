@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AdminType extends AbstractType
 {
@@ -18,8 +19,10 @@ class AdminType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email',EmailType::class)
-            ->add('mdp',PasswordType::class)
-            ->add('numtel')
+            ->add('password',PasswordType::class)
+            ->add('numtel', TextType::class, array(
+                'required' => true,
+                'attr' => ['pattern' => '/^[0-9]{8}$/', 'maxlength' => 8]))
         ;
     }
 

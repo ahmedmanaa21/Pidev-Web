@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+    {{ include('reclamation/formBack.html.twig', {'button_label': 'reply'}) }}
+
+    <a href="{{ path('indexBackrec') }}">back to list</a>
+
+{% endblock %}

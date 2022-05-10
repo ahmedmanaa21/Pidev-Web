@@ -1,0 +1,89 @@
+{% extends 'base.front.html.twig' %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <h1>Events</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <span class="theme-cl"> </span>
+                    <h1>Events</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for evenement in evenements %}
+                <!-- Single Destination -->
+                <div class="col-md-4 col-md-6">
+                    <article class="destination-box style-1">
+                        <div class="destination-box-image">
+                            <figure>
+                                <a href="{{ path('app_evenement_details', {'id': evenement.id}) }}">
+                                    <img
+                                            src="{{ asset('Upload/')}}{{ evenement.image }}"
+                                            class="img-responsive listing-box-img"
+                                            alt=""
+                                    />
+                                    <div class="list-overlay"></div>
+                                </a>
+
+                                <h4 class="destination-place">
+                                    <a href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{ evenement.nom}} </a>
+                                </h4>
+
+                            </figure>
+                        </div>
+
+                        <div class="entry-meta">
+                            <div class="course-ratings">
+                                {% if evenement.rate < 1 %}
+                                    <i class="fa fa-star-o mystar" aria-hidden="true" ></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar " aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+
+                                {% elseif evenement.rate >= 1 %}
+                                    {% for i in 1..evenement.rate | round %}
+                                        <i class="fa fa-star mystar" aria-hidden="true"></i>
+
+                                    {% endfor %}
+                                {% else %}
+
+                                    <i class="fa fa-star-o mystar" aria-hidden="true" ></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar " aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o mystar" aria-hidden="true"></i>
+                                {% endif  %}
+                            <div class="meta-item meta-comment fl-right">
+                        <span class="text-through"></span>
+
+
+                            </div>
+                        </div>
+
+                        <div class="inner-box">
+                            <div class="box-inner-ellipsis">
+                                <h4 class="entry-location">
+                                    <a href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{evenement.description}}</a>
+                                </h4>
+                                <div class="price-box">
+                                    <div class="destination-price fl-right">
+                                        <a href="{{ path('app_evenement_details', {'id': evenement.id}) }}"><i class="theme-cl ti-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

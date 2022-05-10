@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Zonecamping{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+    <h1>Modifier la zone de camping</h1>
+
+    {{ include('zonecamping/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-dark btn-icon-text" href="{{ path('app_zonecamping_index') }}">back to list</a>
+
+    {{ include('zonecamping/_delete_form.html.twig') }}
+    </div>
+</section>
+{% endblock %}

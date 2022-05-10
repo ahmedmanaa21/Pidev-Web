@@ -1,0 +1,149 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %} Nos equipements {% endblock %}
+
+
+{% block body %}
+
+
+<div class="container">
+        <div class="row">   
+          <div class="col-md-12">
+            <div class="heading">
+              <span class="theme-cl">Top Destinations</span>
+              <h1>Popular Destinations</h1>
+            </div>
+            <div class="sidebar-search">
+
+                <div class="input-group custom-search-form">
+
+                    <input type="text" id="search" class="form-control" placeholder="search">
+                </div>
+                <!-- /input-group -->
+            </div>
+            
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+                jQuery(document).ready(function() {
+                    var searchRequest = null;
+                    $("#search").keyup(function() {
+                        var minlength = 1;
+                        var that = this;
+                        var value = $(this).val();
+                        var entitySelector = $("#entitiesNav").html('');
+                        if (value.length >= minlength ) {
+                            if (searchRequest != null)
+                                searchRequest.abort();
+                            searchRequest = $.ajax({
+                                type: "GET",
+                                url: "{{ path('searchEquipement') }}",
+                                data: {
+                                    'q' : value
+                                },
+                                dataType: "text",
+                                success: function(msg){
+                                    //we need to check if the value is the same
+                                    if (value===$(that).val()) {
+                                        var result = JSON.parse(msg);
+                                        $.each(result, function(key, arr) {
+                                            $.each(arr, function(id, value) {
+                                                if (key === 'equipement') {
+                                                    if (id !== 'error') {
+                                                        console.log(value[1]);
+                                                        console.log(value[0]);
+                                                        entitySelector.append('<div class="col-md-4 col-md-6"><article class="destination-box style-1"><div class="destination-box-image"><figure><a href="destination-detail.html"><img src="/Upload/'+value[0]+'" class="img-responsive listing-box-img" /><div class="list-overlay"></div></a><h4 class="destination-place"><a href="destination-detail.html">'+value[1]+'</a></h4><a href="#" class="list-like left"><i class="ti-heart"></i></a></figure></div><div class="entry-meta"><div class="meta-item meta-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i> </div> <div class="meta-item meta-comment fl-right"><span class="text-through"></span><span class="real-price padd-l-10 font-bold">'+value[2]+' DT</span></div></div><div class="inner-box"><div class="box-inner-ellipsis"><h4 class="entry-location"><a href="destination-detail.html">'+value[3]+'</a></h4><div class="price-box"><div class="destination-price fl-right"><a href="#"><i class="theme-cl ti-arrow-right"></i></a></div></div></div><div></div></article></div>');
+                                                       //entitySelector.append(' <div class="row"> <div class="col-lg-8 p-0"><div class="blog-item"> <div class="bi-pic"> <img src="public/picture/'+value[1]+'"></div> <div class="bi-text">  <h5><a href="#">'+value[1]+'</a></h5> <p><a  style="border-radius: 50% 20% / 10% 40%;background: #f36100;float: right;" class="p-1 mb-1  text-white " href="/detailRegime/'+id+'"> Détails </a> </p></div> </div>');
+                                                    } else {
+                                                        entitySelector.append('<li class="errorLi">'+value+'</li>');
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="row" id="entitiesNav">
+         {% for equipement in equipements %}
+          <!-- Single Destination -->
+          <div class="col-md-4 col-md-6" >
+            <article class="destination-box style-1">
+              <div class="destination-box-image">
+                <figure id="">
+                  <a href="">
+                    <img
+                      src="{{ asset('Upload/')}}{{ equipement.image }}"
+                      class="img-responsive listing-box-img"
+                     
+                    />
+                    <div class="list-overlay"></div>
+                  </a>
+
+                <h4 class="destination-place">
+                    <a href="destination-detail.html">{{ equipement.nomEquipement}} </a>
+                </h4>
+                <a href="#" class="list-like left"><i class="ti-heart"></i
+                  ></a>
+                </figure>
+                </div>
+
+                <div class="entry-meta">
+                    <div class="meta-item meta-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half"></i>
+                    </div>
+                    <div class="meta-item meta-comment fl-right">
+                       
+                  <span class="real-price padd-l-10 font-bold">{{equipement.prixEquipement}} DT</span>
+                  
+                    </div>
+                </div>
+
+                <div class="inner-box">
+                    <div class="box-inner-ellipsis">
+                        <h4 class="entry-location">
+                            <a href="destination-detail.html">{{equipement.descriptionEquipement}}</a>       
+                
+                   </h4>
+                        <div class="price-box">
+                            <a href="{{path("vp_add", {refEquipement: equipement.refEquipement})}}" class="btn btn-success"> <i class="bi bi-cart-plus"></i> Add
+                            </a>
+
+
+                        </div>
+                        
+                    </div>
+                    <div>
+                      
+            
+                </div>
+               
+                </article>
+             
+                </div>
+                {% endfor %} 
+                {{ knp_pagination_render(equipements) }}    
+                </div>  
+                               
+                </div>
+                </div>
+
+{% endblock %}

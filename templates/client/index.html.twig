@@ -6,23 +6,34 @@
 <section>
 <div class="container">
     <h1>Clients</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#rech tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <input class="form-control" id="myInput" type="text" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search"><br><br>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Cin</th>
-                <th>Nomprenom</th>
+                <th>Nom & Prenom</th>
                 <th>Surnom</th>
                 <th>Sexe</th>
                 <th>Email</th>
-                <th>Mdp</th>
-                <th>Datenaissance</th>
+                <th>Date de naissance</th>
                 <th>Adresse</th>
                 <th>Image</th>
-                <th>actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="rech">
         {% for client in clients %}
             <tr>
                 <td>{{ client.cin }}</td>
@@ -30,14 +41,10 @@
                 <td>{{ client.surnom }}</td>
                 <td>{{ client.sexe }}</td>
                 <td>{{ client.email }}</td>
-                <td>{{ client.mdp }}</td>
                 <td>{{ client.datenaissance ? client.datenaissance|date('Y-m-d') : '' }}</td>
                 <td>{{ client.adresse }}</td>
-                <td>{{ client.image }}</td>
-                <td>
-                    <a href="{{ path('app_client_show', {'cin': client.cin}) }}">show</a>
-                    <a href="{{ path('app_client_edit', {'cin': client.cin}) }}">edit</a>
-                </td>
+                <td><img src="{{ asset('images/' ~ client.image) }}" alt="" width="90" height="90" ></td>
+
             </tr>
         {% else %}
             <tr>
@@ -46,6 +53,13 @@
         {% endfor %}
         </tbody>
     </table>
-    </section>
+    <div class="d-flex mt-4 flex-wrap">
+        <nav class="ml-auto">
+            <ul class="pagination separated pagination-info">
+    {{ knp_pagination_render(clients) }}
+            </ul>
+        </nav>
+    </div>
 </div>
+</section>
 {% endblock %}

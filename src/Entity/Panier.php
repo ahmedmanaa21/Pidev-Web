@@ -34,7 +34,7 @@ class Panier
      * @ORM\Column(name="nbr_equipement", type="integer", nullable=false)
      */
     private $nbrEquipement;
-
+ 
     /**
      * @var int
      *
@@ -62,6 +62,8 @@ class Panier
      */
     private $refEquipement;
 
+    
+    
     public function getIdPanier(): ?int
     {
         return $this->idPanier;
